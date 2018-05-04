@@ -131,6 +131,7 @@ wild_bootstrap <- function(model, times = 300, distribution = "rnorm", statistic
       # New model
       new_model <- constructed_model(fitted_values, resids, data, distribution)
       statistic_star[time] <- statistic_fun(new_model)
+      print(paste("Iteration: ", time))
     }
 
     return(list(statistic_n, sort(statistic_star)))
