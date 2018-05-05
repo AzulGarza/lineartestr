@@ -119,7 +119,7 @@ wild_bootstrap <- function(model, times = 300, distribution = "rnorm", statistic
     # Statistic with residuals without function
     statistic_n <- statistic_fun(model)
 
-    data <- data_independet(model)
+    data <- independent_data(model)
     fitted_values <- model$fitted.values
     resids <- model$residuals
 

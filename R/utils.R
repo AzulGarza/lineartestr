@@ -11,7 +11,7 @@ require(dplyr)
 
 # Functions ---------------------------------------------------------------
 
-data_independet <- function(model){
+independent_data <- function(model){
   # Get the data of the independent variables of
   # a `model`
   dep_var <- all.vars(model$call)[1]
