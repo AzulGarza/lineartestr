@@ -14,9 +14,9 @@ require(dplyr)
 independent_data <- function(model){
   # Get the data of the independent variables of
   # a `model`
-  dep_var <- all.vars(model$call)[1]
+  indep_vars <- attr(model$terms, "term.labels")
 
-  data <- select_(model$model, paste("-", dep_var))
+  data <- select_(model$model, .dots = indep_vars)
 
   return(data)
 }
