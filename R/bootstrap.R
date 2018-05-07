@@ -134,7 +134,7 @@ wild_bootstrap <- function(model, times = 300, distribution = "rnorm", statistic
       print(paste("Iteration: ", time))
     }
 
-    return(list(statistic_n, sort(statistic_star)))
+    return(list(statistic = statistic_n, bootstrap = sort(statistic_star)))
 
   }
 
