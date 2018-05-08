@@ -58,7 +58,7 @@ reset_test <- function(model, robust = F){
     data = data.frame(model_m, y_squared, y_cubic)
   )
   restrictions <- cbind(
-    matrix(rep(0, 2*n_obs_pre), nrow = 2),
+    matrix(rep(0, 2*n_obs_pre - 2), nrow = 2),
     matrix(c(1,0,0,1), nrow = 2)
   )
   value <- matrix(c(0,0))
