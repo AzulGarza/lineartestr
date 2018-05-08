@@ -22,7 +22,7 @@ asy_var <- function(model, robust = F){
   #  data_m <- cbind(intercept, data)
   #} else {
   #  data_m <- data
-  }
+  #}
   var <- solve(t(data_m)%*%data_m)
   if(!robust){
     return(sum(resids^2)*var/n_obs)
