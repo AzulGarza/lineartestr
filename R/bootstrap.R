@@ -90,7 +90,7 @@ presiduals <- function(fitted_values, residuals, new_dep_value){
 
   } else {
 
-    indicator <- as.numeric(fitted_values < new_dep_value)
+    indicator <- as.numeric(fitted_values <= new_dep_value)
 
     return((1/sqrt(n_obs))*sum(residuals*indicator))
 
