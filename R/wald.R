@@ -47,7 +47,7 @@ wald_test <- function(model, restrictions, value, robust = F){
     asy_var_theta <- solve(restrictions%*%vcovHC(model, type = "HC1")%*%t(restrictions))
   }
   wald_test$wald_value <- as.numeric(t(theta)%*%asy_var_theta%*%theta)
-  wald_test$p_value <- pchisq(wald_test$wald_value, df = n_rest)
+  wald_test$p_value <- 1-pchisq(wald_test$wald_value, df = n_rest)
   return(wald_test)
 }
 
