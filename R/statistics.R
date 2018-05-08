@@ -53,6 +53,7 @@ reset_test <- function(model, robust = F){
   y_cubic <- fitted_values^3
   n_obs_pre <- length(model$coefficients)
   model_m <- model$model
+  weight_sample <- model_m$`(weights)`
   new_model <- update(
     model, . ~ . + y_squared + y_cubic,
     data = data.frame(model_m, y_squared, y_cubic)
