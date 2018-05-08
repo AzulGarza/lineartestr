@@ -14,7 +14,7 @@ asy_var <- function(model, robust = F){
   resids <- model$residuals
   data_m <- model.matrix(formula(model$terms), model$model)
   #data <- data.matrix(independent_data(model))
-  n_obs <- nrow(data)
+  n_obs <- nrow(data_m)
   #if(as.logical(attr(model$terms, "intercept"))){
     # Adding ones if is necesary
   #  intercept <- rep(1, n_obs)
