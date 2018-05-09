@@ -30,7 +30,7 @@ plot_bootstrap <- function(wild_bootstrap){
       color = "red"
     ) +
     geom_text(
-      aes(x = value, y = 0, vjust = -2, hjust = -0.2, label = "Observed\n value"),
+      aes(x = value, y = 0, vjust = -2, hjust = 3, label = "Observed\n value"),
       data = value_d,
       color = "red",
       size = 3
