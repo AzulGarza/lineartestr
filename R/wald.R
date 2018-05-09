@@ -40,7 +40,7 @@ wald_test <- function(model, restrictions, value, robust = F){
     stop("Restrictions matrix must have a full rank")
   }
   wald_test <- list(wald_value = NULL, p_value = NULL)
-  theta <- restrictions%*%coefs - value
+  theta <- restrictions%*%coefs[!is.na(coefs)] - value
   if(!robust){
     asy_var_theta <- solve(restrictions%*%vcov(model)%*%t(restrictions))
   } else {
