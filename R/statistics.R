@@ -51,7 +51,7 @@ reset_test <- function(model, robust = F){
   fitted_values <- model$fitted.values
   y_squared <- fitted_values^2
   y_cubic <- fitted_values^3
-  n_obs_pre <- length(model$coefficients)
+  n_obs_pre <- sum(!is.na(model$coefficients))
   model_m <- model$model
   assign("weight_sample",model$weights,envir = globalenv())
   new_model <- update(
