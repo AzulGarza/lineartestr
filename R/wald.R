@@ -26,7 +26,7 @@ wald_test <- function(model, restrictions, value, robust = F){
     stop("Restriction and value must be a matrix class")
   }
   coefs <- model$coefficients
-  n_coefs <- length(coefs)
+  n_coefs <- sum(!is.na(coefs))
   n_rest <- nrow(restrictions)
   if(ncol(restrictions) != n_coefs){
     stop("Number of columns of restrictions must be equal to number of coefficients,
