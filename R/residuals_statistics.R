@@ -22,7 +22,7 @@ presiduals_x <- function(fitted_values, residuals, new_dep_value){
 
     indicator <- as.numeric(fitted_values <= new_dep_value)
 
-    return((1/sqrt(n_obs))*sum(residuals*indicator)) #CHECCCK DIVISION!
+    return((1/sqrt(n_fitted))*sum(residuals*indicator))
 
   }
 }
@@ -39,7 +39,7 @@ presiduals <- function(fitted_values, resids){
   # Acumulated distribution of residuals at each residual point
   ordered_res <- resids[order(fitted_values)]
   n_obs <- length(resids)
-  dist_values <- cumsum(ordered_res)
+  dist_values <- cumsum(ordered_res)/sqrt(n_obs)
 
   return(dist_values)
 }
