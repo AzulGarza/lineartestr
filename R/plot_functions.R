@@ -3,11 +3,14 @@
 plot.dl_test <- function(dl_test){
   # This function receives a wild_bootstrap result
   bootstrap <- dplyr::tibble(bootstrap = dl_test$bootstrap)
-  value_d <- dplyr::tibble(value = dl_test$statistic)
   d <- density(bootstrap$bootstrap)
   max <- 0
-  quantiles <- dplyr::tibble(q = quantile(bootstrap$bootstrap, c(.9, .95, .99)))
-  quantiles <- dplyr::mutate(quantiles, prob = c("0.90*", "0.95**", "0.99***"))
+
+  test <- dl_test[["test"]]
+  value_d <- dplyr::select(test, statistic)
+  quantiles <- dplyr::select(test, dplyr::contains("quantile"))
+  quantiles <- tidyr::gather(quantiles, key = "prob", value = "q")
+  quantiles <- dplyr::mutate(quantiles, prob = readr::parse_number(prob)/100)
 
   plot <-
     ggplot2::ggplot(bootstrap, ggplot2::aes(bootstrap)) +
@@ -19,12 +22,12 @@ plot.dl_test <- function(dl_test){
       size = 3
     ) +
     ggplot2::geom_vline(
-      ggplot2::aes(xintercept = value),
+      ggplot2::aes(xintercept = statistic),
       data = value_d,
       color = "red"
     ) +
     ggplot2::geom_text(
-      ggplot2::aes(x = value, y = 0, vjust = -2, hjust = 1.1, label = "Observed\n value"),
+      ggplot2::aes(x = statistic, y = 0, vjust = -2, hjust = 1.1, label = "Observed\n statistic"),
       data = value_d,
       color = "red",
       size = 3

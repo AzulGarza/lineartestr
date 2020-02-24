@@ -14,4 +14,6 @@ Imports:
     sandwich,
     dplyr,
     ggplot2,
-    viridis
+    viridis,
+    tidyr,
+    readr

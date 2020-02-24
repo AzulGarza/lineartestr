@@ -40,7 +40,7 @@ wald_test <- function(model, restrictions, value, robust = F){
   wald_test <- list(wald_value = NULL, p_value = NULL)
   theta <- restrictions%*%coefs[!is.na(coefs)] - value
   if(!robust){
-    asy_var_theta <- solve(restrictions%*%sandwich::vcov(model)%*%t(restrictions))
+    asy_var_theta <- solve(restrictions%*%vcov(model)%*%t(restrictions))
   } else {
     asy_var_theta <- solve(restrictions%*%sandwich::vcovHC(model, type = "HC1")%*%t(restrictions))
   }
@@ -61,7 +61,7 @@ reset_test <- function(model, robust = F){
   y_cubic <- fitted_values^3
   n_obs_pre <- sum(!is.na(model$coefficients))
   model_m <- model$model
-  assign("weight_sample",model$weights,envir = globalenv())
+  #assign("weight_sample",model$weights,envir = globalenv())
   new_model <- update(
     model, . ~ . + y_squared + y_cubic,
     data = data.frame(model_m, y_squared, y_cubic)
@@ -77,7 +77,7 @@ reset_test <- function(model, robust = F){
 
 # Bootstrap
 
-dominguez_lobato_test <- function(model, times = 300, distribution = "rnorm", statistic = "cvm_value", verbose = FALSE){
+dominguez_lobato_test <- function(model, times = 300, distribution = "rnorm", statistic = "cvm_value", verbose = FALSE, quantiles=c(.9, .95, .99)){
   # Input
   # - model: A lm model
   # - times: Times of boostrap
@@ -92,7 +92,7 @@ dominguez_lobato_test <- function(model, times = 300, distribution = "rnorm", st
   statistic_fun <- get(statistic)
 
   # Statistic with residuals without function
-  statistic_n <- statistic_fun(model)
+  statistic_value <- statistic_fun(model)
 
   data <- independent_data(model)
   fitted_values <- model$fitted.values
@@ -109,8 +109,23 @@ dominguez_lobato_test <- function(model, times = 300, distribution = "rnorm", st
     if (verbose) print(paste("Iteration: ", time))
   }
 
-  r_list <- list(statistic = statistic_n, bootstrap = sort(statistic_star),
-                 name_statistic = statistic, name_distribution = distribution)
+  test <- list(
+    name_distribution = distribution,
+    name_statistic = statistic,
+    statistic = statistic_value,
+    p_value = sum(statistic_star>=statistic_value)/times
+  )
+
+  # Calculating critical values
+  calculated_quantiles <- quantile(statistic_star, quantiles)
+
+  for(idx in seq_along(quantiles)){
+    test[[paste0("quantile_", 100*quantiles[idx])]] <- calculated_quantiles[idx]
+  }
+
+  test <- dplyr::as_tibble(test)
+
+  r_list <- list(test = test, bootstrap = sort(statistic_star))
   class(r_list) <- "dl_test"
   return(r_list)
 
