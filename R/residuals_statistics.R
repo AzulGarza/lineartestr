@@ -1,11 +1,3 @@
-
-# Objective ---------------------------------------------------------------
-
-# Functions of the statistics
-require(dplyr)
-require(purrr)
-require(bigmemory)
-
 # Sample distribution  of residuals
 presiduals_x <- function(fitted_values, residuals, new_dep_value){
   # Input:
