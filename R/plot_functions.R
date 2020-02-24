@@ -6,7 +6,7 @@ require(viridis)
 
 # code --------------------------------------------------------------------
 
-plot.dominguez_lobato_test <- function(dl_test){
+plot.dl_test <- function(dl_test){
   # This function receives a wild_bootstrap result
   bootstrap <- dplyr::tibble(bootstrap = dl_test$bootstrap)
   value_d <- dplyr::tibble(value = dl_test$statistic)

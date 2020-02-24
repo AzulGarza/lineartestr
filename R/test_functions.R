@@ -109,7 +109,9 @@ dominguez_lobato_test <- function(model, times = 300, distribution = "rnorm", st
     if (verbose) print(paste("Iteration: ", time))
   }
 
-  return(list(statistic = statistic_n, bootstrap = sort(statistic_star),
-              name_statistic = statistic, name_distribution = distribution))
+  r_list <- list(statistic = statistic_n, bootstrap = sort(statistic_star),
+                 name_statistic = statistic, name_distribution = distribution)
+  class(r_list) <- "dl_test"
+  return(r_list)
 
 }
