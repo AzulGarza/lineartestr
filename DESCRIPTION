@@ -17,3 +17,5 @@ Imports:
     viridis,
     tidyr,
     readr
+Suggests: 
+    testthat

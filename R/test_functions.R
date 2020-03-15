@@ -84,11 +84,11 @@ dominguez_lobato_test <- function(model, times = 300, distribution = "rnorm", st
   # - distribution: Distribution to noise the residuals
   # - statistic: Statistic to use in bootstap
 
-  if(class(model) != "lm"){
-
-    stop("Model must be a lm model")
-
-  }
+  #if(class(model) != "lm"){
+  #
+  #  stop("Model must be a lm model")
+  #
+  #}
   statistic_fun <- get(statistic)
 
   # Statistic with residuals without function
