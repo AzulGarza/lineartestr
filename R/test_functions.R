@@ -20,12 +20,18 @@
 #' wald_test(model, restrictions, value)
 wald_test <- function(model, restrictions, value, robust = F){
 
-  if(class(model) != "lm"){
+  if(!inherits(model, "lm")){
     stop("Model must be an lm model")
   }
-  if(any(class(restrictions) != "matrix", class(value) != "matrix")){
-    stop("Restriction and value must be a matrix class")
+
+  if(!inherits(restrictions, "matrix")){
+    stop("restrictions and value must be a matrix class")
   }
+
+  if(!inherits(value, "matrix")){
+    stop("value must be a matrix class")
+  }
+
   coefs <- model$coefficients
   n_coefs <- length(coefs)
   n_rest <- nrow(restrictions)
@@ -48,13 +54,16 @@ wald_test <- function(model, restrictions, value, robust = F){
 
   wald_test <- list(wald_value = NULL, p_value = NULL)
   theta <- restrictions%*%coefs - value
+
   if(!robust){
     asy_var_theta <- solve(restrictions%*%vcov(model)%*%t(restrictions))
   } else {
     asy_var_theta <- solve(restrictions%*%sandwich::vcovHC(model, type = "HC1")%*%t(restrictions))
   }
+
   wald_test$wald_value <- as.numeric(t(theta)%*%asy_var_theta%*%theta)
   wald_test$p_value <- 1-pchisq(wald_test$wald_value, df = n_rest)
+
   return(wald_test)
 }
 
@@ -72,9 +81,10 @@ wald_test <- function(model, restrictions, value, robust = F){
 #' reset_test(model)
 reset_test <- function(model, robust = F){
 
-  if(class(model) != "lm"){
+  if(!inherits(model, "lm")){
     stop("Model must be an lm model")
   }
+
   fitted_values <- model$fitted.values
   y_squared <- fitted_values^2
   y_cubic <- fitted_values^3
@@ -120,8 +130,8 @@ dominguez_lobato_test <- function(
     n_cores = 1
   ){
 
-  if(class(model) != "lm"){
-   stop("Model must be an lm model")
+  if(!inherits(model, "lm")){
+    stop("Model must be an lm model")
   }
 
   statistic_fun <- get(statistic)

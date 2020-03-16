@@ -16,7 +16,8 @@ Imports:
     ggplot2,
     viridis,
     tidyr,
-    readr
+    readr,
+    parallel
 Suggests: 
     testthat
 RoxygenNote: 7.0.2

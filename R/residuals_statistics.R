@@ -34,8 +34,8 @@ presiduals <- function(fitted_values, resids){
 #' cvm_value(model)
 cvm_value <- function(model){
 
-  if(class(model) != "lm"){
-   stop("Model must be an lm model")
+  if(!inherits(model, "lm")){
+    stop("Model must be an lm model")
   }
 
   fitted_values <- model$fitted.values
@@ -58,7 +58,7 @@ cvm_value <- function(model){
 #' kmv_value(model)
 kmv_value <- function(model){
 
-  if(class(model) != "lm"){
+  if(!inherits(model, "lm")){
     stop("Model must be an lm model")
   }
 

@@ -13,6 +13,10 @@
 #' independent_data(model)
 independent_data <- function(model){
 
+  if(!inherits(model, "lm")){
+    stop("Model must be an lm model")
+  }
+
   indep_vars <- attr(model$terms, "term.labels")
 
   data <- dplyr::select_(model$model, .dots = indep_vars)
@@ -41,7 +45,7 @@ constructed_model <- function(fitted_dep_var, residuals, data_indep, distributio
 
   if(n_fitted != n_resids | n_resids != n_data){
 
-    stop("Inpust must have the same length")
+    stop("Inputs must have the same length")
 
   }
   # Adding noise to residuals

@@ -13,6 +13,10 @@
 #' plot_dl_test(dl_test)
 plot_dl_test <- function(x){
   # This function receives a wild_bootstrap result
+  if(!inherits(x, "dl_test")){
+    stop("Model must be a dl_test object")
+  }
+
   bootstrap <- dplyr::tibble(bootstrap = x$bootstrap)
   d <- density(bootstrap$bootstrap)
   max <- 0
