@@ -3,14 +3,14 @@
 \name{wald_test}
 \alias{wald_test}
 \title{Custom Wald test.
-Tests restrictions*coefficientes = value.}
+Tests restrictions*coefficients = value.}
 \usage{
 wald_test(model, restrictions, value, robust = F)
 }
 \arguments{
 \item{model}{An lm model.}
 
-\item{restrictions}{Matrix of size len(coefficients)xnumber of restrictions,
+\item{restrictions}{Matrix of size (number of restrictions) times length(coefficients),
 for free restrictions use zeros.}
 
 \item{value}{Values of restrictions.}
@@ -18,11 +18,11 @@ for free restrictions use zeros.}
 \item{robust}{Use robust varcov matrix.}
 }
 \value{
-A list with the wald value and the corresponding pvalue.
+A list with the Wald value and the corresponding pvalue.
 }
 \description{
 Custom Wald test.
-Tests restrictions*coefficientes = value.
+Tests restrictions*coefficients = value.
 }
 \examples{
 x <- 1:10

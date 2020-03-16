@@ -14,7 +14,7 @@ reset_test(model, robust = F)
 \item{robust}{Use robust varcov matrix.}
 }
 \value{
-A list with the wald value and the corresponding pvalue.
+A list with the Wald value and the corresponding pvalue.
 }
 \description{
 Reset test.

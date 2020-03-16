@@ -10,7 +10,7 @@ independent_data(model)
 \item{model}{A lm model.}
 }
 \value{
-A dataframe with the independet data of the lm model.
+A dataframe with the independent data of the lm model.
 }
 \description{
 Gets the independent data of a lm model.

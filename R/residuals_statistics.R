@@ -6,7 +6,7 @@
 #'
 #' @param fitted_values Vector of fitted values.
 #' @param resids Residuals vector of each fitted value.
-#' @return Vector of size len(resids).
+#' @return Vector of size length(resids).
 #' @examples
 #' y_hat <- c(4, 8, 7)
 #' resids <- c(1, 5, 3)

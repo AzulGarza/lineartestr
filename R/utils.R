@@ -4,7 +4,7 @@
 #' Gets the independent data of a lm model.
 #'
 #' @param model A lm model.
-#' @return A dataframe with the independet data of the lm model.
+#' @return A dataframe with the independent data of the lm model.
 #' @examples
 #' x <- 1:10
 #' z <- x**2

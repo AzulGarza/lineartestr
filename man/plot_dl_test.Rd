@@ -10,7 +10,7 @@ plot_dl_test(x)
 \item{x}{An object of class "dl_test".}
 }
 \value{
-PLot of type ggplot.
+Plot of type ggplot.
 }
 \description{
 Plots the Dominguez-Lobato test.

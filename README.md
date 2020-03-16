@@ -54,10 +54,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.4166667
-#> $ quantile_90       <dbl> 2.58979e-28
-#> $ quantile_95       <dbl> 3.36778e-28
-#> $ quantile_99       <dbl> 5.764217e-28
+#> $ p_value           <dbl> 0.39
+#> $ quantile_90       <dbl> 3.009221e-28
+#> $ quantile_95       <dbl> 4.045725e-28
+#> $ quantile_99       <dbl> 5.720393e-28
 ```
 
 Also `linearspectestr` can plot the results
@@ -67,6 +67,31 @@ plot_dl_test(dl_test)
 ```
 
 <img src="man/figures/README-plot-1.png" width="70%" />
+
+RUN IN PARALLEL\!
+
+``` r
+library(linearspectestr)
+x_p <- 1:1e5
+y_p <- 1:1e5
+
+lm_model_p <- lm(y_p~x_p)
+
+dl_test_p <- dominguez_lobato_test(lm_model_p, n_cores=7)
+```
+
+``` r
+dplyr::glimpse(dl_test_p$test)
+#> Observations: 1
+#> Variables: 7
+#> $ name_distribution <chr> "rnorm"
+#> $ name_statistic    <chr> "cvm_value"
+#> $ statistic         <dbl> 6.324343e-21
+#> $ p_value           <dbl> 0.3533333
+#> $ quantile_90       <dbl> 1.888409e-20
+#> $ quantile_95       <dbl> 2.714834e-20
+#> $ quantile_99       <dbl> 5.507548e-20
+```
 
 ## References
 

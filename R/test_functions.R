@@ -2,14 +2,14 @@
 # Specification tests ------------------------------------------------------
 
 #' Custom Wald test.
-#' Tests restrictions*coefficientes = value.
+#' Tests restrictions*coefficients = value.
 #'
 #' @param model An lm model.
-#' @param restrictions Matrix of size len(coefficients)xnumber of restrictions,
+#' @param restrictions Matrix of size (number of restrictions) times length(coefficients),
 #' for free restrictions use zeros.
 #' @param value Values of restrictions.
 #' @param robust Use robust varcov matrix.
-#' @return A list with the wald value and the corresponding pvalue.
+#' @return A list with the Wald value and the corresponding pvalue.
 #' @examples
 #' x <- 1:10
 #' z <- x**2
@@ -23,7 +23,7 @@ wald_test <- function(model, restrictions, value, robust = F){
   if(class(model) != "lm"){
     stop("Model must be an lm model")
   }
-  if(class(restrictions) != "matrix" | class(value) != "matrix"){
+  if(any(class(restrictions) != "matrix", class(value) != "matrix")){
     stop("Restriction and value must be a matrix class")
   }
   coefs <- model$coefficients
@@ -64,7 +64,7 @@ wald_test <- function(model, restrictions, value, robust = F){
 #'
 #' @param model An lm model.
 #' @param robust Use robust varcov matrix.
-#' @return A list with the wald value and the corresponding pvalue.
+#' @return A list with the Wald value and the corresponding pvalue.
 #' @examples
 #' x <- 1:10
 #' y <- 1:10
@@ -97,20 +97,28 @@ reset_test <- function(model, robust = F){
 #' Tests the specification of a linear model using wild-bootstrap.
 #'
 #' @param model An lm model.
-#' @param times Number of bootstrap samples.
 #' @param distribution Type of noise added to residuals, ej "rnorm" or "rrademacher".
-#' @param statistic Type of statistic to be used, can be one of "cmv_value" or "kmv_value".
+#' @param statistic Type of statistic to be used, can be one of "cvm_value" or "kmv_value".
+#' @param times Number of bootstrap samples.
+#' @param quantiles Vector of quantiles to c alculate pvalues.
 #' @param verbose TRUE to print each bootstrap iteration.
-#' @param quantiles Vector of quantiles to calculate pvalues.
-#' @return A list with dataframe results and the ordered values of each boostrap iteration.
-#' @references Manuel A. Domínguez and Ignacio N. Lobato (2019).
-#' Specification testing with estimated variables. Econometric Reviews.
+#' @param n_cores Number of cores to be used.
+#' @return A list with dataframe results and the ordered values of each bootstrap iteration.
+#' @references Manuel A. Dominguez and Ignacio N. Lobato (2019).
+#' Specification Testing with Estimated Variables. Econometric Reviews.
 #' @examples
 #' x <- 1:10
 #' y <- 1:10
 #' model <- lm(y~x-1)
 #' dominguez_lobato_test(model)
-dominguez_lobato_test <- function(model, times = 300, distribution = "rnorm", statistic = "cvm_value", verbose = FALSE, quantiles=c(.9, .95, .99)){
+dominguez_lobato_test <- function(
+    model,
+    distribution = "rnorm", statistic = "cvm_value",
+    times = 300,
+    quantiles=c(.9, .95, .99),
+    verbose = FALSE,
+    n_cores = 1
+  ){
 
   if(class(model) != "lm"){
    stop("Model must be an lm model")
@@ -129,12 +137,33 @@ dominguez_lobato_test <- function(model, times = 300, distribution = "rnorm", st
   # Times statistics with constructed residuals
   statistic_star <- rep(NA, times)
 
-  for(time in 1:times){
-    # New model
-    new_model <- constructed_model(fitted_values, resids, data, distribution)
-    statistic_star[time] <- statistic_fun(new_model)
-    if (verbose) print(paste("Iteration: ", time))
+  if(n_cores > 1){
+    cl <- parallel::makeCluster(n_cores)
+    parallel::clusterExport(cl, varlist = ls(), envir = environment())
+    parallel::clusterCall(cl, function() library(linearspectestr))
+
+    statistic_star <- parallel::parLapply(cl, 1:times, function(time) {
+      # New model
+      new_model <- constructed_model(fitted_values, resids, data, distribution)
+      statistic <- statistic_fun(new_model)
+
+      return(statistic)
+    })
+
+    parallel::stopCluster(cl)
+  } else {
+    statistic_star <- lapply(1:times, function(time) {
+      # New model
+      new_model <- constructed_model(fitted_values, resids, data, distribution)
+      #statistic_star[time] <- statistic_fun(new_model)
+      statistic <- statistic_fun(new_model)
+
+      if (verbose) print(paste("Iteration: ", time))
+      return(statistic)
+    })
   }
+
+  statistic_star <- unlist(statistic_star, use.names = FALSE)
 
   test <- list(
     name_distribution = distribution,

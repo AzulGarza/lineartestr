@@ -2,18 +2,18 @@
 % Please edit documentation in R/custom_distributions.R
 \name{rmammen_cont}
 \alias{rmammen_cont}
-\title{Random deviates of mammen continouos distribution.}
+\title{Random deviates of Mammen continuous distribution.}
 \usage{
 rmammen_cont(n)
 }
 \arguments{
-\item{n}{Number of obervations.}
+\item{n}{Number of observations.}
 }
 \value{
 Random deviates of size n.
 }
 \description{
-Random deviates of mammen continouos distribution.
+Random deviates of Mammen continuous distribution.
 }
 \examples{
 rmammen_cont(10)

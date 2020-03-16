@@ -6,28 +6,31 @@
 \usage{
 dominguez_lobato_test(
   model,
-  times = 300,
   distribution = "rnorm",
   statistic = "cvm_value",
+  times = 300,
+  quantiles = c(0.9, 0.95, 0.99),
   verbose = FALSE,
-  quantiles = c(0.9, 0.95, 0.99)
+  n_cores = 1
 )
 }
 \arguments{
 \item{model}{An lm model.}
 
-\item{times}{Number of bootstrap samples.}
-
 \item{distribution}{Type of noise added to residuals, ej "rnorm" or "rrademacher".}
 
-\item{statistic}{Type of statistic to be used, can be one of "cmv_value" or "kmv_value".}
+\item{statistic}{Type of statistic to be used, can be one of "cvm_value" or "kmv_value".}
+
+\item{times}{Number of bootstrap samples.}
+
+\item{quantiles}{Vector of quantiles to c alculate pvalues.}
 
 \item{verbose}{TRUE to print each bootstrap iteration.}
 
-\item{quantiles}{Vector of quantiles to calculate pvalues.}
+\item{n_cores}{Number of cores to be used.}
 }
 \value{
-A list with dataframe results and the ordered values of each boostrap iteration.
+A list with dataframe results and the ordered values of each bootstrap iteration.
 }
 \description{
 Tests the specification of a linear model using wild-bootstrap.
@@ -39,6 +42,6 @@ model <- lm(y~x-1)
 dominguez_lobato_test(model)
 }
 \references{
-Manuel A. Domínguez and Ignacio N. Lobato (2019).
-Specification testing with estimated variables. Econometric Reviews.
+Manuel A. Dominguez and Ignacio N. Lobato (2019).
+Specification Testing with Estimated Variables. Econometric Reviews.
 }

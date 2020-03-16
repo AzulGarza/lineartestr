@@ -2,18 +2,18 @@
 % Please edit documentation in R/custom_distributions.R
 \name{rrademacher}
 \alias{rrademacher}
-\title{Random deviates of rademacher distribution.}
+\title{Random deviates of Rademacher distribution.}
 \usage{
 rrademacher(n)
 }
 \arguments{
-\item{n}{Number of obervations.}
+\item{n}{Number of observations.}
 }
 \value{
 Random deviates of size n.
 }
 \description{
-Random deviates of rademacher distribution.
+Random deviates of Rademacher distribution.
 }
 \examples{
 rrademacher(10)

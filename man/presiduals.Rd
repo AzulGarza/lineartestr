@@ -13,7 +13,7 @@ presiduals(fitted_values, resids)
 \item{resids}{Residuals vector of each fitted value.}
 }
 \value{
-Vector of size len(resids).
+Vector of size length(resids).
 }
 \description{
 Calculates the accumulated distribution of

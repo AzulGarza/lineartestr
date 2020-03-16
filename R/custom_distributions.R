@@ -1,8 +1,8 @@
 # Custom distributions ----------------------------------------------------
 
-#' Random deviates of mammen distribution.
+#' Random deviates of Mammen distribution.
 #'
-#' @param n Number of obervations.
+#' @param n Number of observations.
 #' @return Random deviates of size n.
 #' @examples
 #' rmammen_point(10)
@@ -22,9 +22,9 @@ rmammen_point <- function(n){
   return(res_f)
 }
 
-#' Random deviates of mammen continouos distribution.
+#' Random deviates of Mammen continuous distribution.
 #'
-#' @param n Number of obervations.
+#' @param n Number of observations.
 #' @return Random deviates of size n.
 #' @examples
 #' rmammen_cont(10)
@@ -49,9 +49,9 @@ rmammen_cont <- function(n){
   return(res)
 }
 
-#' Random deviates of rademacher distribution.
+#' Random deviates of Rademacher distribution.
 #'
-#' @param n Number of obervations.
+#' @param n Number of observations.
 #' @return Random deviates of size n.
 #' @examples
 #' rrademacher(10)

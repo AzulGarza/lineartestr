@@ -26,7 +26,6 @@ The goal of `linearspectestr` is to contrast the linear hypothesis of a model:
 ![formula](man/figures/CodeCogsEqn.gif)
 
 
-
 Using the Domínguez-Lobato test which relies on wild-bootstrap.
 
 ## Installation
@@ -68,6 +67,24 @@ Also `linearspectestr` can plot the results
 ```{r plot}
 plot_dl_test(dl_test)
 ```
+
+RUN IN PARALLEL!
+
+```{r example_parallel}
+library(linearspectestr)
+x_p <- 1:1e5
+y_p <- 1:1e5
+
+lm_model_p <- lm(y_p~x_p)
+
+dl_test_p <- dominguez_lobato_test(lm_model_p, n_cores=7)
+
+```
+
+```{r table2}
+dplyr::glimpse(dl_test_p$test)
+```
+
 
 ## References
 
