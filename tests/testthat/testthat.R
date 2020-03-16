@@ -1,5 +1,5 @@
 library(testthat)
-library(testr)
+library(linearspectestr)
 
 y_hat <- c(4, 8, 7)
 resids <- c(1, 5, 3)
