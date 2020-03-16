@@ -1,7 +1,11 @@
-# Objective ----------------------------------------------------------------
-# Special functions for wildboostrap
+# Custom distributions ----------------------------------------------------
 
-# Mammen's two points distribution
+#' Random deviates of mammen distribution.
+#'
+#' @param n Number of obervations
+#' @return random deviates of size n
+#' @examples
+#' rmammen_point(10)
 rmammen_point <- function(n){
   sqrt_5 <- sqrt(5)
   # Probability
@@ -18,7 +22,12 @@ rmammen_point <- function(n){
   return(res_f)
 }
 
-# Mammen's continous distribution
+#' Random deviates of mammen continouos distribution.
+#'
+#' @param n Number of obervations
+#' @return random deviates of size n
+#' @examples
+#' rmammen_cont(10)
 rmammen_cont <- function(n){
   # In this case we use two standard  normals
   # Mean default
@@ -40,7 +49,12 @@ rmammen_cont <- function(n){
   return(res)
 }
 
-# Rademacher distribution
+#' Random deviates of rademacher distribution.
+#'
+#' @param n Number of obervations
+#' @return random deviates of size n
+#' @examples
+#' rrademacher(10)
 rrademacher <- function(n){
   # Binominal
   res <- rbinom(n, size = 1, prob = 0.5)

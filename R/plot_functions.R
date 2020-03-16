@@ -1,12 +1,23 @@
-# code --------------------------------------------------------------------
 
-plot.dl_test <- function(dl_test){
+#plot test ---------------------------------------------------------------
+
+#' Plots the dominguez lobato test
+#'
+#' @param x An object of class "dl_test"
+#' @return ggplot of the test
+#' @examples
+#' x <- 1:10
+#' y <- 1:10
+#' model <- lm(y~x-1)
+#' dl_test <- dominguez_lobato_test(model)
+#' plot_dl_test(dl_test)
+plot_dl_test <- function(x){
   # This function receives a wild_bootstrap result
-  bootstrap <- dplyr::tibble(bootstrap = dl_test$bootstrap)
+  bootstrap <- dplyr::tibble(bootstrap = x$bootstrap)
   d <- density(bootstrap$bootstrap)
   max <- 0
 
-  test <- dl_test[["test"]]
+  test <- x[["test"]]
   value_d <- dplyr::select(test, statistic)
   quantiles <- dplyr::select(test, dplyr::contains("quantile"))
   quantiles <- tidyr::gather(quantiles, key = "prob", value = "q")

@@ -1,27 +1,42 @@
 
+# Residuals statistics ----------------------------------------------------
+
+#' Calculates the accumulated distribution of
+#' residuals at each residual point
+#'
+#' @param fitted_values vector of fitted values
+#' @param resids residuals vector of each fitted value
+#' @return vector of size len(resids)
+#' @examples
+#' y_hat <- c(4, 8, 7)
+#' resids <- c(1, 5, 3)
+#' presiduals(y_hat, resids)
 presiduals <- function(fitted_values, resids){
-  # Input:
-  # - fitted_values: Fitted values from a model
-  # - residuals: residuals from a model
-  # Output:
-  # Acumulated distribution of residuals at each residual point
+
+  if(length(fitted_values) != length(resids)){
+    stop("Lenght of fitted values must be equal to lenght of resids")
+  }
   ordered_res <- resids[order(fitted_values)]
   dist_values <- cumsum(ordered_res)
 
   return(dist_values)
 }
 
-# Cramer von Mises value
+#' Calculates the Cramer von Mises value
+#' given an lm model with its residuals
+#'
+#' @param model A lm model
+#' @return The Cramer von Mises value of the model
+#' @examples
+#' x <- 1:10
+#' y <- 2*x + rnorm(10)
+#' model <- lm(y~x-1)
+#' cvm_value(model)
 cvm_value <- function(model){
-  # Calculates the Cramer von Mises value
-  # given an lm model with its residuals
-  # Input:
-  # - model: A lm model
-  # Output:
-  # The Cramer von Mises value
-  #if(class(model) != "lm"){
-  #  stop("Model must be a lm model")
-  #}
+
+  if(class(model) != "lm"){
+   stop("Model must be an lm model")
+  }
 
   fitted_values <- model$fitted.values
   resids <- model$residuals
@@ -31,14 +46,18 @@ cvm_value <- function(model){
   return(sum(presids**2)/(n_obs**2))
 }
 
-# Kolmogorov value
+#' Calculates the Kolmogorov value
+#' given an lm model with its residuals
+#'
+#' @param model A lm model
+#' @return The Kolmogorov value of the model
+#' @examples
+#' x <- 1:10
+#' y <- 2*x + rnorm(10)
+#' model <- lm(y~x-1)
+#' kmv_value(model)
 kmv_value <- function(model){
-  # Calculates the Kolmogorov value
-  # given a lm model with its residuals
-  # Input:
-  # - model: A lm model
-  # Output:
-  # The Kolmogorov value
+
   if(class(model) != "lm"){
     stop("Model must be a lm model")
   }

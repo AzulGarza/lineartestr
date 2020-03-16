@@ -1,29 +1,38 @@
 
-# Objective ---------------------------------------------------------------
-# Functions for boostrap
+# Specification tests ------------------------------------------------------
 
-# Code --------------------------------------------------------------------
-# Custom Wald test
+#' Custom Wald test
+#' Tests if restrictions*beta = value, where beta are lm coefficients
+#'
+#' @param model An lm model
+#' @param restrictions Matrix of size len(coefficients)xnumber of restrictions,
+#' for free restrictions use zeros
+#' @param value Values of restrictions
+#' @param robust Use robust varcov matrix
+#' @return A list with the wald value and the corresponding pvalue
+#' @examples
+#' x <- 1:10
+#' z <- x**2
+#' y <- 1:10
+#' model <- lm(y~x+z)
+#' restrictions <- diag(3)
+#' value <-  as.matrix(c(0, 0, 0))
+#' wald_test(model, restrictions, value)
 wald_test <- function(model, restrictions, value, robust = F){
-  # Input:
-  # - model: A lm model
-  # - restrictions: M matrix
-  # - value: m value
-  # Ouput
-  # Return the wald statistic and the
-  # result of the constrast
-  # Test if M*beta = m, where M = m_rest,
-  # m = m_val and beta is the coefficiients
-  # of model
+
   if(class(model) != "lm"){
-    stop("Model must be a lm model")
+    stop("Model must be an lm model")
   }
   if(class(restrictions) != "matrix" | class(value) != "matrix"){
     stop("Restriction and value must be a matrix class")
   }
   coefs <- model$coefficients
-  n_coefs <- sum(!is.na(coefs))
+  n_coefs <- length(coefs)
   n_rest <- nrow(restrictions)
+
+  if(sum(is.na(coefs))>0){
+    stop("Some coefficients are NA")
+  }
 
   if(ncol(restrictions) != n_coefs){
     stop("Number of columns of restrictions must be equal to number of coefficients,
@@ -38,7 +47,7 @@ wald_test <- function(model, restrictions, value, robust = F){
   }
 
   wald_test <- list(wald_value = NULL, p_value = NULL)
-  theta <- restrictions%*%coefs[!is.na(coefs)] - value
+  theta <- restrictions%*%coefs - value
   if(!robust){
     asy_var_theta <- solve(restrictions%*%vcov(model)%*%t(restrictions))
   } else {
@@ -49,19 +58,29 @@ wald_test <- function(model, restrictions, value, robust = F){
   return(wald_test)
 }
 
-# reset test for linear model
+#' Reset test
+#' Tests the specification of a linear model adding squared and cubic
+#' fitted values
+#'
+#' @param model An lm model
+#' @param robust Use robust varcov matrix
+#' @return A list with the wald value and the corresponding pvalue
+#' @examples
+#' x <- 1:10
+#' y <- 1:10
+#' model <- lm(y~x)
+#' reset_test(model)
 reset_test <- function(model, robust = F){
-  # Calculates the reset rest
-  # of a linear model
+
   if(class(model) != "lm"){
-    stop("Model must be a lm model")
+    stop("Model must be an lm model")
   }
   fitted_values <- model$fitted.values
   y_squared <- fitted_values^2
   y_cubic <- fitted_values^3
-  n_obs_pre <- sum(!is.na(model$coefficients))
+  n_obs_pre <- length(model$coefficients)
   model_m <- model$model
-  #assign("weight_sample",model$weights,envir = globalenv())
+
   new_model <- update(
     model, . ~ . + y_squared + y_cubic,
     data = data.frame(model_m, y_squared, y_cubic)
@@ -75,20 +94,28 @@ reset_test <- function(model, robust = F){
   return(wald)
 }
 
-# Bootstrap
-
+#' Tests the specification of a linear model using wild bootrap
+#'
+#' @param model An lm model
+#' @param times Number of bootstrap samples
+#' @param distribution Type of noise added to residuals, ej "rnorm" or "rrademacher"
+#' @param statistic Type of statistic to be used, can be one of "cmv_value" or "kmv_value"
+#' @param verbose TRUE for print each bootstrap iteration
+#' @param quantiles vector of quantiles to calculate pvalues
+#' @return A list with a data.frame results and the orderend values of each boostrap iteration
+#' @references Manuel A. Domínguez and Ignacio N. Lobato (2019)
+#' *Specification testing with estimated variables.* Econometrics Reviews.
+#' @examples
+#' x <- 1:10
+#' y <- 1:10
+#' model <- lm(y~x-1)
+#' dominguez_lobato_test(model)
 dominguez_lobato_test <- function(model, times = 300, distribution = "rnorm", statistic = "cvm_value", verbose = FALSE, quantiles=c(.9, .95, .99)){
-  # Input
-  # - model: A lm model
-  # - times: Times of boostrap
-  # - distribution: Distribution to noise the residuals
-  # - statistic: Statistic to use in bootstap
 
-  #if(class(model) != "lm"){
-  #
-  #  stop("Model must be a lm model")
-  #
-  #}
+  if(class(model) != "lm"){
+   stop("Model must be an lm model")
+  }
+
   statistic_fun <- get(statistic)
 
   # Statistic with residuals without function
@@ -127,6 +154,6 @@ dominguez_lobato_test <- function(model, times = 300, distribution = "rnorm", st
 
   r_list <- list(test = test, bootstrap = sort(statistic_star))
   class(r_list) <- "dl_test"
-  return(r_list)
 
+  return(r_list)
 }

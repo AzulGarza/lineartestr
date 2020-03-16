@@ -1,12 +1,18 @@
 
-# Objective ---------------------------------------------------------------
+# utils  ------------------------------------------------------------------
 
-# Utils functions
-# Functions ---------------------------------------------------------------
-
+#' Gets the independent data of a lm model
+#'
+#' @param model An lm model
+#' @return A dataframe with the independet data of the lm model
+#' @examples
+#' x <- 1:10
+#' z <- x**2
+#' y <- 1:10
+#' model <- lm(y~x+z)
+#' independent_data(model)
 independent_data <- function(model){
-  # Get the data of the independent variables of
-  # a `model`
+
   indep_vars <- attr(model$terms, "term.labels")
 
   data <- dplyr::select_(model$model, .dots = indep_vars)
@@ -14,16 +20,21 @@ independent_data <- function(model){
   return(data)
 }
 
-# Constructed model
+#' Constructsa new model with noised residuals
+#' y_new  = y_fitted + residuals*noise
+#'
+#' @param fitted_dep_var fitted values of an lm model
+#' @param residuals residuals of a model
+#' @param data_indep independent data used to adjust an lm model
+#' @param distribution Type of noise added to residuals, ej "rnorm" or "rrademacher"
+#' @return Constructed lm model
+#' @examples
+#' y_hat <- 1:10
+#' residuals <- rnorm(10)
+#' data_indep <- data.frame(x=10:19)
+#' constructed_model(y_hat, residuals, data_indep)
 constructed_model <- function(fitted_dep_var, residuals, data_indep, distribution = "rnorm"){
-  # Input:
-  # - fitted_dep_var: The fitted values of the dependet variable
-  # - residuals: The residuals of the model
-  # - data_indep: The data of the independent variables
-  # Output:
-  # -A constructed model with the dependent variable modified:
-  #     y_new  = y_fitted + residuals*noise
-  # where y_fitted corresponds to fitted_dep_var
+
   n_fitted <- length(fitted_dep_var)
   n_resids <- length(residuals)
   n_data <- nrow(data_indep)
