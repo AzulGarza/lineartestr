@@ -1,10 +1,10 @@
 
 #plot test ---------------------------------------------------------------
 
-#' Plots the dominguez lobato test
+#' Plots the Dominguez-Lobato test.
 #'
-#' @param x An object of class "dl_test"
-#' @return ggplot of the test
+#' @param x An object of class "dl_test".
+#' @return PLot of type ggplot.
 #' @examples
 #' x <- 1:10
 #' y <- 1:10

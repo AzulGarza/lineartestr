@@ -2,11 +2,11 @@
 # Residuals statistics ----------------------------------------------------
 
 #' Calculates the accumulated distribution of
-#' residuals at each residual point
+#' residuals at each residual point.
 #'
-#' @param fitted_values vector of fitted values
-#' @param resids residuals vector of each fitted value
-#' @return vector of size len(resids)
+#' @param fitted_values Vector of fitted values.
+#' @param resids Residuals vector of each fitted value.
+#' @return Vector of size len(resids).
 #' @examples
 #' y_hat <- c(4, 8, 7)
 #' resids <- c(1, 5, 3)
@@ -23,10 +23,10 @@ presiduals <- function(fitted_values, resids){
 }
 
 #' Calculates the Cramer von Mises value
-#' given an lm model with its residuals
+#' given an lm model with its residuals.
 #'
-#' @param model A lm model
-#' @return The Cramer von Mises value of the model
+#' @param model An lm model.
+#' @return The Cramer von Mises value of the model.
 #' @examples
 #' x <- 1:10
 #' y <- 2*x + rnorm(10)
@@ -47,10 +47,10 @@ cvm_value <- function(model){
 }
 
 #' Calculates the Kolmogorov value
-#' given an lm model with its residuals
+#' given an lm model with its residuals.
 #'
-#' @param model A lm model
-#' @return The Kolmogorov value of the model
+#' @param model An lm model.
+#' @return The Kolmogorov value of the model.
 #' @examples
 #' x <- 1:10
 #' y <- 2*x + rnorm(10)
@@ -59,7 +59,7 @@ cvm_value <- function(model){
 kmv_value <- function(model){
 
   if(class(model) != "lm"){
-    stop("Model must be a lm model")
+    stop("Model must be an lm model")
   }
 
   fitted_values <- model$fitted.values

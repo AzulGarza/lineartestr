@@ -2,24 +2,24 @@
 % Please edit documentation in R/test_functions.R
 \name{reset_test}
 \alias{reset_test}
-\title{Reset test
+\title{Reset test.
 Tests the specification of a linear model adding squared and cubic
-fitted values}
+fitted values.}
 \usage{
 reset_test(model, robust = F)
 }
 \arguments{
-\item{model}{An lm model}
+\item{model}{An lm model.}
 
-\item{robust}{Use robust varcov matrix}
+\item{robust}{Use robust varcov matrix.}
 }
 \value{
-A list with the wald value and the corresponding pvalue
+A list with the wald value and the corresponding pvalue.
 }
 \description{
-Reset test
+Reset test.
 Tests the specification of a linear model adding squared and cubic
-fitted values
+fitted values.
 }
 \examples{
 x <- 1:10

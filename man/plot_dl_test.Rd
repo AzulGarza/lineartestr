@@ -2,18 +2,18 @@
 % Please edit documentation in R/plot_functions.R
 \name{plot_dl_test}
 \alias{plot_dl_test}
-\title{Plots the dominguez lobato test}
+\title{Plots the Dominguez-Lobato test.}
 \usage{
 plot_dl_test(x)
 }
 \arguments{
-\item{x}{An object of class "dl_test"}
+\item{x}{An object of class "dl_test".}
 }
 \value{
-ggplot of the test
+PLot of type ggplot.
 }
 \description{
-Plots the dominguez lobato test
+Plots the Dominguez-Lobato test.
 }
 \examples{
 x <- 1:10

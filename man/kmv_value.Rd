@@ -3,19 +3,19 @@
 \name{kmv_value}
 \alias{kmv_value}
 \title{Calculates the Kolmogorov value
-given an lm model with its residuals}
+given an lm model with its residuals.}
 \usage{
 kmv_value(model)
 }
 \arguments{
-\item{model}{A lm model}
+\item{model}{An lm model.}
 }
 \value{
-The Kolmogorov value of the model
+The Kolmogorov value of the model.
 }
 \description{
 Calculates the Kolmogorov value
-given an lm model with its residuals
+given an lm model with its residuals.
 }
 \examples{
 x <- 1:10

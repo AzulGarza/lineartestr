@@ -7,10 +7,10 @@
 rmammen_cont(n)
 }
 \arguments{
-\item{n}{Number of obervations}
+\item{n}{Number of obervations.}
 }
 \value{
-random deviates of size n
+Random deviates of size n.
 }
 \description{
 Random deviates of mammen continouos distribution.

@@ -2,8 +2,8 @@
 
 #' Random deviates of mammen distribution.
 #'
-#' @param n Number of obervations
-#' @return random deviates of size n
+#' @param n Number of obervations.
+#' @return Random deviates of size n.
 #' @examples
 #' rmammen_point(10)
 rmammen_point <- function(n){
@@ -24,8 +24,8 @@ rmammen_point <- function(n){
 
 #' Random deviates of mammen continouos distribution.
 #'
-#' @param n Number of obervations
-#' @return random deviates of size n
+#' @param n Number of obervations.
+#' @return Random deviates of size n.
 #' @examples
 #' rmammen_cont(10)
 rmammen_cont <- function(n){
@@ -51,8 +51,8 @@ rmammen_cont <- function(n){
 
 #' Random deviates of rademacher distribution.
 #'
-#' @param n Number of obervations
-#' @return random deviates of size n
+#' @param n Number of obervations.
+#' @return Random deviates of size n.
 #' @examples
 #' rrademacher(10)
 rrademacher <- function(n){

@@ -2,18 +2,18 @@
 % Please edit documentation in R/utils.R
 \name{independent_data}
 \alias{independent_data}
-\title{Gets the independent data of a lm model}
+\title{Gets the independent data of a lm model.}
 \usage{
 independent_data(model)
 }
 \arguments{
-\item{model}{An lm model}
+\item{model}{A lm model.}
 }
 \value{
-A dataframe with the independet data of the lm model
+A dataframe with the independet data of the lm model.
 }
 \description{
-Gets the independent data of a lm model
+Gets the independent data of a lm model.
 }
 \examples{
 x <- 1:10

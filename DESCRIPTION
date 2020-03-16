@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Federico Garza
 Maintainer: Federico Garza <fede.garza.ramirez@gmail.com>
 Description: Tests if the linear hypothesis of a model
-    is correct specified, using reset and Dominguez-Lobato tests.
+    is correct specified, using reset and Dominguez Lobato tests.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

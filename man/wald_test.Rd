@@ -2,27 +2,27 @@
 % Please edit documentation in R/test_functions.R
 \name{wald_test}
 \alias{wald_test}
-\title{Custom Wald test
-Tests if restrictions*beta = value, where beta are lm coefficients}
+\title{Custom Wald test.
+Tests restrictions*coefficientes = value.}
 \usage{
 wald_test(model, restrictions, value, robust = F)
 }
 \arguments{
-\item{model}{An lm model}
+\item{model}{An lm model.}
 
 \item{restrictions}{Matrix of size len(coefficients)xnumber of restrictions,
-for free restrictions use zeros}
+for free restrictions use zeros.}
 
-\item{value}{Values of restrictions}
+\item{value}{Values of restrictions.}
 
-\item{robust}{Use robust varcov matrix}
+\item{robust}{Use robust varcov matrix.}
 }
 \value{
-A list with the wald value and the corresponding pvalue
+A list with the wald value and the corresponding pvalue.
 }
 \description{
-Custom Wald test
-Tests if restrictions*beta = value, where beta are lm coefficients
+Custom Wald test.
+Tests restrictions*coefficientes = value.
 }
 \examples{
 x <- 1:10

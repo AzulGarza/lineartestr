@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_functions.R
 \name{dominguez_lobato_test}
 \alias{dominguez_lobato_test}
-\title{Tests the specification of a linear model using wild bootrap}
+\title{Tests the specification of a linear model using wild-bootstrap.}
 \usage{
 dominguez_lobato_test(
   model,
@@ -14,23 +14,23 @@ dominguez_lobato_test(
 )
 }
 \arguments{
-\item{model}{An lm model}
+\item{model}{An lm model.}
 
-\item{times}{Number of bootstrap samples}
+\item{times}{Number of bootstrap samples.}
 
-\item{distribution}{Type of noise added to residuals, ej "rnorm" or "rrademacher"}
+\item{distribution}{Type of noise added to residuals, ej "rnorm" or "rrademacher".}
 
-\item{statistic}{Type of statistic to be used, can be one of "cmv_value" or "kmv_value"}
+\item{statistic}{Type of statistic to be used, can be one of "cmv_value" or "kmv_value".}
 
-\item{verbose}{TRUE for print each bootstrap iteration}
+\item{verbose}{TRUE to print each bootstrap iteration.}
 
-\item{quantiles}{vector of quantiles to calculate pvalues}
+\item{quantiles}{Vector of quantiles to calculate pvalues.}
 }
 \value{
-A list with a data.frame results and the orderend values of each boostrap iteration
+A list with dataframe results and the ordered values of each boostrap iteration.
 }
 \description{
-Tests the specification of a linear model using wild bootrap
+Tests the specification of a linear model using wild-bootstrap.
 }
 \examples{
 x <- 1:10
@@ -39,6 +39,6 @@ model <- lm(y~x-1)
 dominguez_lobato_test(model)
 }
 \references{
-Manuel A. Domínguez and Ignacio N. Lobato (2019)
-*Specification testing with estimated variables.* Econometrics Reviews.
+Manuel A. Domínguez and Ignacio N. Lobato (2019).
+Specification testing with estimated variables. Econometric Reviews.
 }

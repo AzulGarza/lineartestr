@@ -3,19 +3,19 @@
 \name{cvm_value}
 \alias{cvm_value}
 \title{Calculates the Cramer von Mises value
-given an lm model with its residuals}
+given an lm model with its residuals.}
 \usage{
 cvm_value(model)
 }
 \arguments{
-\item{model}{A lm model}
+\item{model}{An lm model.}
 }
 \value{
-The Cramer von Mises value of the model
+The Cramer von Mises value of the model.
 }
 \description{
 Calculates the Cramer von Mises value
-given an lm model with its residuals
+given an lm model with its residuals.
 }
 \examples{
 x <- 1:10

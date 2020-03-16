@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{constructed_model}
 \alias{constructed_model}
-\title{Constructsa new model with noised residuals
+\title{Constructs a new model with noised residuals:
 y_new  = y_fitted + residuals*noise}
 \usage{
 constructed_model(
@@ -13,19 +13,19 @@ constructed_model(
 )
 }
 \arguments{
-\item{fitted_dep_var}{fitted values of an lm model}
+\item{fitted_dep_var}{Fitted values of an lm model.}
 
-\item{residuals}{residuals of a model}
+\item{residuals}{Residuals of a model.}
 
-\item{data_indep}{independent data used to adjust an lm model}
+\item{data_indep}{Independent data used to adjust an lm model.}
 
-\item{distribution}{Type of noise added to residuals, ej "rnorm" or "rrademacher"}
+\item{distribution}{Type of noise added to residuals, ej "rnorm" or "rrademacher".}
 }
 \value{
-Constructed lm model
+Constructed lm model.
 }
 \description{
-Constructsa new model with noised residuals
+Constructs a new model with noised residuals:
 y_new  = y_fitted + residuals*noise
 }
 \examples{

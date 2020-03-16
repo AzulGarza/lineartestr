@@ -1,10 +1,10 @@
 
 # utils  ------------------------------------------------------------------
 
-#' Gets the independent data of a lm model
+#' Gets the independent data of a lm model.
 #'
-#' @param model An lm model
-#' @return A dataframe with the independet data of the lm model
+#' @param model A lm model.
+#' @return A dataframe with the independet data of the lm model.
 #' @examples
 #' x <- 1:10
 #' z <- x**2
@@ -20,14 +20,14 @@ independent_data <- function(model){
   return(data)
 }
 
-#' Constructsa new model with noised residuals
+#' Constructs a new model with noised residuals:
 #' y_new  = y_fitted + residuals*noise
 #'
-#' @param fitted_dep_var fitted values of an lm model
-#' @param residuals residuals of a model
-#' @param data_indep independent data used to adjust an lm model
-#' @param distribution Type of noise added to residuals, ej "rnorm" or "rrademacher"
-#' @return Constructed lm model
+#' @param fitted_dep_var Fitted values of an lm model.
+#' @param residuals Residuals of a model.
+#' @param data_indep Independent data used to adjust an lm model.
+#' @param distribution Type of noise added to residuals, ej "rnorm" or "rrademacher".
+#' @return Constructed lm model.
 #' @examples
 #' y_hat <- 1:10
 #' residuals <- rnorm(10)

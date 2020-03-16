@@ -3,21 +3,21 @@
 \name{presiduals}
 \alias{presiduals}
 \title{Calculates the accumulated distribution of
-residuals at each residual point}
+residuals at each residual point.}
 \usage{
 presiduals(fitted_values, resids)
 }
 \arguments{
-\item{fitted_values}{vector of fitted values}
+\item{fitted_values}{Vector of fitted values.}
 
-\item{resids}{residuals vector of each fitted value}
+\item{resids}{Residuals vector of each fitted value.}
 }
 \value{
-vector of size len(resids)
+Vector of size len(resids).
 }
 \description{
 Calculates the accumulated distribution of
-residuals at each residual point
+residuals at each residual point.
 }
 \examples{
 y_hat <- c(4, 8, 7)

@@ -1,15 +1,15 @@
 
 # Specification tests ------------------------------------------------------
 
-#' Custom Wald test
-#' Tests if restrictions*beta = value, where beta are lm coefficients
+#' Custom Wald test.
+#' Tests restrictions*coefficientes = value.
 #'
-#' @param model An lm model
+#' @param model An lm model.
 #' @param restrictions Matrix of size len(coefficients)xnumber of restrictions,
-#' for free restrictions use zeros
-#' @param value Values of restrictions
-#' @param robust Use robust varcov matrix
-#' @return A list with the wald value and the corresponding pvalue
+#' for free restrictions use zeros.
+#' @param value Values of restrictions.
+#' @param robust Use robust varcov matrix.
+#' @return A list with the wald value and the corresponding pvalue.
 #' @examples
 #' x <- 1:10
 #' z <- x**2
@@ -58,13 +58,13 @@ wald_test <- function(model, restrictions, value, robust = F){
   return(wald_test)
 }
 
-#' Reset test
+#' Reset test.
 #' Tests the specification of a linear model adding squared and cubic
-#' fitted values
+#' fitted values.
 #'
-#' @param model An lm model
-#' @param robust Use robust varcov matrix
-#' @return A list with the wald value and the corresponding pvalue
+#' @param model An lm model.
+#' @param robust Use robust varcov matrix.
+#' @return A list with the wald value and the corresponding pvalue.
 #' @examples
 #' x <- 1:10
 #' y <- 1:10
@@ -94,17 +94,17 @@ reset_test <- function(model, robust = F){
   return(wald)
 }
 
-#' Tests the specification of a linear model using wild bootrap
+#' Tests the specification of a linear model using wild-bootstrap.
 #'
-#' @param model An lm model
-#' @param times Number of bootstrap samples
-#' @param distribution Type of noise added to residuals, ej "rnorm" or "rrademacher"
-#' @param statistic Type of statistic to be used, can be one of "cmv_value" or "kmv_value"
-#' @param verbose TRUE for print each bootstrap iteration
-#' @param quantiles vector of quantiles to calculate pvalues
-#' @return A list with a data.frame results and the orderend values of each boostrap iteration
-#' @references Manuel A. Domínguez and Ignacio N. Lobato (2019)
-#' *Specification testing with estimated variables.* Econometrics Reviews.
+#' @param model An lm model.
+#' @param times Number of bootstrap samples.
+#' @param distribution Type of noise added to residuals, ej "rnorm" or "rrademacher".
+#' @param statistic Type of statistic to be used, can be one of "cmv_value" or "kmv_value".
+#' @param verbose TRUE to print each bootstrap iteration.
+#' @param quantiles Vector of quantiles to calculate pvalues.
+#' @return A list with dataframe results and the ordered values of each boostrap iteration.
+#' @references Manuel A. Domínguez and Ignacio N. Lobato (2019).
+#' Specification testing with estimated variables. Econometric Reviews.
 #' @examples
 #' x <- 1:10
 #' y <- 1:10

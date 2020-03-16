@@ -1,7 +1,7 @@
 ## Test environments
 
 * Local Ubuntu install, R 3.6.1
-* win-builder (devel)
+* win-builder (release)
 
 ## R CMD check results
 
