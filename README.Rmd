@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # linearspectestr
 
 <!-- badges: start -->
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/linearspectestr/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/linearspectestr/commits)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
 <!-- badges: end -->
@@ -88,4 +88,4 @@ dplyr::glimpse(dl_test_p$test)
 
 ## References
 
-* Manuel A. Domínguez and Ignacio N. Lobato (2019). [Specification testing with estimated variables.]((https://www.tandfonline.com/doi/citedby/10.1080/07474938.2019.1687116?scroll=top&needAccess=true)) Econometric Reviews.
+* Manuel A. Domínguez and Ignacio N. Lobato (2019). [Specification testing with estimated variables.](https://www.tandfonline.com/doi/citedby/10.1080/07474938.2019.1687116?) Econometric Reviews.

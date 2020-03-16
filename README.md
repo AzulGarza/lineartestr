@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/linearspectestr/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/linearspectestr/commits)
 [![MIT
 license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
@@ -54,10 +54,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.39
-#> $ quantile_90       <dbl> 3.009221e-28
-#> $ quantile_95       <dbl> 4.045725e-28
-#> $ quantile_99       <dbl> 5.720393e-28
+#> $ p_value           <dbl> 0.4166667
+#> $ quantile_90       <dbl> 3.381346e-28
+#> $ quantile_95       <dbl> 4.197734e-28
+#> $ quantile_99       <dbl> 5.858133e-28
 ```
 
 Also `linearspectestr` can plot the results
@@ -87,15 +87,15 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.3533333
-#> $ quantile_90       <dbl> 1.888409e-20
-#> $ quantile_95       <dbl> 2.714834e-20
-#> $ quantile_99       <dbl> 5.507548e-20
+#> $ p_value           <dbl> 0.3566667
+#> $ quantile_90       <dbl> 1.707989e-20
+#> $ quantile_95       <dbl> 2.40952e-20
+#> $ quantile_99       <dbl> 5.134807e-20
 ```
 
 ## References
 
   - Manuel A. Domínguez and Ignacio N. Lobato (2019). [Specification
     testing with estimated
-    variables.](\(https://www.tandfonline.com/doi/citedby/10.1080/07474938.2019.1687116?scroll=top&needAccess=true\))
+    variables.](https://www.tandfonline.com/doi/citedby/10.1080/07474938.2019.1687116?)
     Econometric Reviews.
