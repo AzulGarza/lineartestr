@@ -16,7 +16,7 @@ Plot of type ggplot.
 Plot the reset test.
 }
 \examples{
-x <- 1:10
+x <- 1:10 + rnorm(10)
 y <- 1:10
 model <- lm(y~x-1)
 r_test <- reset_test(model)

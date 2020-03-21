@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+![R-CMD-check](https://github.com/FedericoGarza/linearspectestr/workflows/R-CMD-check/badge.svg)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/linearspectestr/commits)
 [![MIT
 license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
@@ -57,10 +58,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.3833333
-#> $ quantile_90       <dbl> 2.681806e-28
-#> $ quantile_95       <dbl> 4.058283e-28
-#> $ quantile_99       <dbl> 5.350507e-28
+#> $ p_value           <dbl> 0.4133333
+#> $ quantile_90       <dbl> 2.437899e-28
+#> $ quantile_95       <dbl> 3.943113e-28
+#> $ quantile_99       <dbl> 7.069412e-28
 ```
 
 Also `linearspectestr` can plot the results
@@ -90,10 +91,10 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.3233333
-#> $ quantile_90       <dbl> 1.604743e-20
-#> $ quantile_95       <dbl> 2.060992e-20
-#> $ quantile_99       <dbl> 4.672057e-20
+#> $ p_value           <dbl> 0.3433333
+#> $ quantile_90       <dbl> 1.72606e-20
+#> $ quantile_95       <dbl> 2.523203e-20
+#> $ quantile_99       <dbl> 3.641144e-20
 ```
 
 #### *RESET* test can also be used to test the linear hypothesis
@@ -113,8 +114,8 @@ r_test <- reset_test(lm_model)
 dplyr::glimpse(r_test)
 #> Observations: 1
 #> Variables: 6
-#> $ statistic   <dbl> 1.969437
-#> $ p_value     <dbl> 0.3735444
+#> $ statistic   <dbl> 0.1608255
+#> $ p_value     <dbl> 0.9227354
 #> $ df          <int> 2
 #> $ quantile_90 <dbl> 4.60517
 #> $ quantile_95 <dbl> 5.991465
