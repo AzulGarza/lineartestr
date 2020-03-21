@@ -1,3 +1,4 @@
 exportPattern("^[[:alpha:]]+")
 importFrom("stats", "density", "lm", "pchisq", "quantile", "rbinom",
-               "rnorm", "update", "vcov")
+               "rnorm", "update", "vcov", "coefficients", "dchisq", "fitted", "model.frame",
+               "qchisq", "residuals", "fitted.values")

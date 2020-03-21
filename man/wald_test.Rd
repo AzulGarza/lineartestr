@@ -5,20 +5,29 @@
 \title{Custom Wald test.
 Tests restrictions*coefficients = value.}
 \usage{
-wald_test(model, restrictions, value, robust = F)
+wald_test(
+  model,
+  restrictions,
+  value,
+  robust = F,
+  quantiles = c(0.9, 0.95, 0.99)
+)
 }
 \arguments{
-\item{model}{An lm model.}
+\item{model}{Model compatible with
+`fitted` and `residuals` functions.}
 
 \item{restrictions}{Matrix of size (number of restrictions) times length(coefficients),
 for free restrictions use zeros.}
 
 \item{value}{Values of restrictions.}
 
-\item{robust}{Use robust varcov matrix.}
+\item{robust}{Use robust `varcov` matrix.}
+
+\item{quantiles}{Vector of quantiles to calculate pvalues.}
 }
 \value{
-A list with the Wald value and the corresponding pvalue.
+A `tibbble` with the Wald value, the corresponding pvalue and the quantiles of the distribution.
 }
 \description{
 Custom Wald test.
@@ -32,4 +41,6 @@ model <- lm(y~x+z)
 restrictions <- diag(3)
 value <-  as.matrix(c(0, 0, 0))
 wald_test(model, restrictions, value)
+wald_test(model, restrictions, value, robust = TRUE)
+wald_test(model, restrictions, value, quantiles = c(.97))
 }

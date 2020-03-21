@@ -1,63 +1,49 @@
 
 # utils  ------------------------------------------------------------------
 
-#' Gets the independent data of a lm model.
-#'
-#' @param model A lm model.
-#' @return A dataframe with the independent data of the lm model.
-#' @examples
-#' x <- 1:10
-#' z <- x**2
-#' y <- 1:10
-#' model <- lm(y~x+z)
-#' independent_data(model)
-independent_data <- function(model){
-
-  if(!inherits(model, "lm")){
-    stop("Model must be an lm model")
-  }
-
-  indep_vars <- attr(model$terms, "term.labels")
-
-  data <- dplyr::select_(model$model, .dots = indep_vars)
-
-  return(data)
-}
 
 #' Constructs a new model with noised residuals:
 #' y_new  = y_fitted + residuals*noise
 #'
-#' @param fitted_dep_var Fitted values of an lm model.
-#' @param residuals Residuals of a model.
-#' @param data_indep Independent data used to adjust an lm model.
+#' @param model An existing fit from a model function such as `lm`, `lfe`, `Arima` and others
+#' compatible with `update`.
+#' @param fitting_data Data used to adjust a linear model.
 #' @param distribution Type of noise added to residuals, ej "rnorm" or "rrademacher".
-#' @return Constructed lm model.
+#' @return Constructed linear model.
 #' @examples
-#' y_hat <- 1:10
-#' residuals <- rnorm(10)
-#' data_indep <- data.frame(x=10:19)
-#' constructed_model(y_hat, residuals, data_indep)
-constructed_model <- function(fitted_dep_var, residuals, data_indep, distribution = "rnorm"){
+#' x <- 1:100
+#' y <- 2*x + rnorm(100)
+#' model <- lm(y~x-1)
+#' fitting_data <- model.frame(model)
+#' updated_model(model, fitting_data)
+#' updated_model(model, fitting_data, distribution = "rnorm")
+#' updated_model(model, fitting_data, distribution = "rmammen_point")
+#' updated_model(model, fitting_data, distribution = "rmammen_cont")
+#' updated_model(model, fitting_data, distribution = "rrademacher")
+#'
+#' x_arma <- rnorm(100)
+#' arma_model <- forecast::Arima(x_arma, c(1, 0, 1))
+#' fitting_data_arma <- model.frame(arma_model)
+#' updated_model(arma_model, fitting_data_arma)
+updated_model <- function(model, fitting_data, distribution = "rnorm"){
+  # Getting fitted values and residuals
+  fitted_values <- as.vector(fitted.values(model))
+  residuals <- as.vector(residuals(model))
 
-  n_fitted <- length(fitted_dep_var)
-  n_resids <- length(residuals)
-  n_data <- nrow(data_indep)
-
-  if(n_fitted != n_resids | n_resids != n_data){
-
-    stop("Inputs must have the same length")
-
-  }
   # Adding noise to residuals
   n <- length(residuals)
   dist_f <- get(distribution)
   rvariable <- dist_f(n)
 
   #New dependent variable
-  y_constructed <- fitted_dep_var + residuals*rvariable
+  y_constructed <- fitted_values + rvariable*residuals
 
-  new_model <- lm(y_constructed ~ ., data = dplyr::mutate(data_indep, y_constructed = y_constructed))
-
+  if(inherits(model, "forecast_ARIMA")){
+    new_model <- forecast::Arima(y_constructed, model = model)
+  } else {
+    new_data <- data.frame(fitting_data, y_constructed)
+    new_model <- update(model, formula = y_constructed ~ ., data = new_data)
+  }
   return(new_model)
 }
 

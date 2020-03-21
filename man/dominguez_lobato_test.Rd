@@ -17,13 +17,13 @@ dominguez_lobato_test(
 \arguments{
 \item{model}{An lm model.}
 
-\item{distribution}{Type of noise added to residuals, ej "rnorm" or "rrademacher".}
+\item{distribution}{Type of noise added to residuals, ej `rnorm` or `rrademacher`.}
 
-\item{statistic}{Type of statistic to be used, can be one of "cvm_value" or "kmv_value".}
+\item{statistic}{Type of statistic to be used, can be one of `cvm_value` or `kmv_value`.}
 
 \item{times}{Number of bootstrap samples.}
 
-\item{quantiles}{Vector of quantiles to c alculate pvalues.}
+\item{quantiles}{Vector of quantiles to calculate pvalues.}
 
 \item{verbose}{TRUE to print each bootstrap iteration.}
 
@@ -40,6 +40,8 @@ x <- 1:10
 y <- 1:10
 model <- lm(y~x-1)
 dominguez_lobato_test(model)
+dominguez_lobato_test(model, distribution = "rmammen_point", statistic = "kmv_value")
+dominguez_lobato_test(model, times = 100)
 }
 \references{
 Manuel A. Dominguez and Ignacio N. Lobato (2019).

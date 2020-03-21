@@ -4,12 +4,14 @@
 #' Custom Wald test.
 #' Tests restrictions*coefficients = value.
 #'
-#' @param model An lm model.
+#' @param model Model compatible with
+#' `fitted` and `residuals` functions.
 #' @param restrictions Matrix of size (number of restrictions) times length(coefficients),
 #' for free restrictions use zeros.
 #' @param value Values of restrictions.
-#' @param robust Use robust varcov matrix.
-#' @return A list with the Wald value and the corresponding pvalue.
+#' @param robust Use robust `varcov` matrix.
+#' @param quantiles Vector of quantiles to calculate pvalues.
+#' @return A `tibbble` with the Wald value, the corresponding pvalue and the quantiles of the distribution.
 #' @examples
 #' x <- 1:10
 #' z <- x**2
@@ -18,11 +20,9 @@
 #' restrictions <- diag(3)
 #' value <-  as.matrix(c(0, 0, 0))
 #' wald_test(model, restrictions, value)
-wald_test <- function(model, restrictions, value, robust = F){
-
-  if(!inherits(model, "lm")){
-    stop("Model must be an lm model")
-  }
+#' wald_test(model, restrictions, value, robust = TRUE)
+#' wald_test(model, restrictions, value, quantiles = c(.97))
+wald_test <- function(model, restrictions, value, robust = F,  quantiles=c(.9, .95, .99)){
 
   if(!inherits(restrictions, "matrix")){
     stop("restrictions and value must be a matrix class")
@@ -32,7 +32,7 @@ wald_test <- function(model, restrictions, value, robust = F){
     stop("value must be a matrix class")
   }
 
-  coefs <- model$coefficients
+  coefs <- coefficients(model)
   n_coefs <- length(coefs)
   n_rest <- nrow(restrictions)
 
@@ -52,7 +52,7 @@ wald_test <- function(model, restrictions, value, robust = F){
     stop("Restrictions matrix must have a full rank")
   }
 
-  wald_test <- list(wald_value = NULL, p_value = NULL)
+  wald_test <- list(statistic = NULL, p_value = NULL, df = n_rest)
   theta <- restrictions%*%coefs - value
 
   if(!robust){
@@ -61,8 +61,17 @@ wald_test <- function(model, restrictions, value, robust = F){
     asy_var_theta <- solve(restrictions%*%sandwich::vcovHC(model, type = "HC1")%*%t(restrictions))
   }
 
-  wald_test$wald_value <- as.numeric(t(theta)%*%asy_var_theta%*%theta)
-  wald_test$p_value <- 1-pchisq(wald_test$wald_value, df = n_rest)
+  wald_test$statistic <- as.numeric(t(theta)%*%asy_var_theta%*%theta)
+  wald_test$p_value <- 1-pchisq(wald_test$statistic, df = n_rest)
+
+  # Calculating critical values
+  calculated_quantiles <- qchisq(quantiles, df = n_rest)
+
+  for(idx in seq_along(quantiles)){
+    wald_test[[paste0("quantile_", 100*quantiles[idx])]] <- calculated_quantiles[idx]
+  }
+
+  wald_test <- dplyr::as_tibble(wald_test)
 
   return(wald_test)
 }
@@ -71,46 +80,56 @@ wald_test <- function(model, restrictions, value, robust = F){
 #' Tests the specification of a linear model adding squared and cubic
 #' fitted values.
 #'
-#' @param model An lm model.
-#' @param robust Use robust varcov matrix.
-#' @return A list with the Wald value and the corresponding pvalue.
+#' @param model An existing fit from a model function such as `lm`, `lfe` and others
+#' compatible with `update`.
+#' @param robust Use robust `varcov` matrix.
+#' @param quantiles Vector of quantiles to calculate pvalues.
+#' @return A `tibble` with the Wald value, the corresponding pvalue, and the quantiles of the distribution.
 #' @examples
 #' x <- 1:10
 #' y <- 1:10
 #' model <- lm(y~x)
 #' reset_test(model)
-reset_test <- function(model, robust = F){
+#' reset_test(model, robust = TRUE)
+#' reset_test(model, quantiles = c(.97))
+reset_test <- function(model, robust = F, quantiles=c(.9, .95, .99)){
 
-  if(!inherits(model, "lm")){
-    stop("Model must be an lm model")
-  }
-
-  fitted_values <- model$fitted.values
+  fitted_values <- fitted(model)
   y_squared <- fitted_values^2
   y_cubic <- fitted_values^3
-  n_obs_pre <- length(model$coefficients)
-  model_m <- model$model
+  n_obs_pre <- length(coefficients(model))
+  model_data <- model.frame(model)
+
+  model_data$y_squared <- y_squared
+  model_data$y_cubic <- y_cubic
 
   new_model <- update(
-    model, . ~ . + y_squared + y_cubic,
-    data = data.frame(model_m, y_squared, y_cubic)
+    model,
+    formula = . ~ . + y_squared + y_cubic,
+    data = model_data
   )
+
   restrictions <- cbind(
     matrix(rep(0, 2*n_obs_pre), nrow = 2),
     matrix(c(1,0,0,1), nrow = 2)
   )
+
   value <- matrix(c(0,0))
-  wald <- wald_test(new_model, restrictions, value, robust)
+  wald <- wald_test(new_model, restrictions, value, robust, quantiles)
+
+
+  class(wald) <- append(class(wald), "reset_test")
+
   return(wald)
 }
 
 #' Tests the specification of a linear model using wild-bootstrap.
 #'
 #' @param model An lm model.
-#' @param distribution Type of noise added to residuals, ej "rnorm" or "rrademacher".
-#' @param statistic Type of statistic to be used, can be one of "cvm_value" or "kmv_value".
+#' @param distribution Type of noise added to residuals, ej `rnorm` or `rrademacher`.
+#' @param statistic Type of statistic to be used, can be one of `cvm_value` or `kmv_value`.
 #' @param times Number of bootstrap samples.
-#' @param quantiles Vector of quantiles to c alculate pvalues.
+#' @param quantiles Vector of quantiles to calculate pvalues.
 #' @param verbose TRUE to print each bootstrap iteration.
 #' @param n_cores Number of cores to be used.
 #' @return A list with dataframe results and the ordered values of each bootstrap iteration.
@@ -121,41 +140,36 @@ reset_test <- function(model, robust = F){
 #' y <- 1:10
 #' model <- lm(y~x-1)
 #' dominguez_lobato_test(model)
+#' dominguez_lobato_test(model, distribution = "rmammen_point", statistic = "kmv_value")
+#' dominguez_lobato_test(model, times = 100)
 dominguez_lobato_test <- function(
     model,
-    distribution = "rnorm", statistic = "cvm_value",
+    distribution = "rnorm",
+    statistic = "cvm_value",
     times = 300,
     quantiles=c(.9, .95, .99),
     verbose = FALSE,
     n_cores = 1
   ){
 
-  if(!inherits(model, "lm")){
-    stop("Model must be an lm model")
-  }
-
-  statistic_fun <- get(statistic)
-
   # Statistic with residuals without function
-  statistic_value <- statistic_fun(model)
+  statistic_v <- statistic_value(model, statistic)
 
-  data <- independent_data(model)
-  fitted_values <- model$fitted.values
-  resids <- model$residuals
-
+  data <- model.frame(model)
 
   # Times statistics with constructed residuals
   statistic_star <- rep(NA, times)
 
   if(n_cores > 1){
     cl <- parallel::makeCluster(n_cores)
+    packs <- c(.packages())
     parallel::clusterExport(cl, varlist = ls(), envir = environment())
-    parallel::clusterCall(cl, function() library(linearspectestr))
+    parallel::clusterCall(cl, function() lapply(packs, library, character.only = T))
 
     statistic_star <- parallel::parLapply(cl, 1:times, function(time) {
       # New model
-      new_model <- constructed_model(fitted_values, resids, data, distribution)
-      statistic <- statistic_fun(new_model)
+      new_model <- updated_model(model, data, distribution)
+      statistic <- statistic_value(new_model, statistic)
 
       return(statistic)
     })
@@ -164,9 +178,8 @@ dominguez_lobato_test <- function(
   } else {
     statistic_star <- lapply(1:times, function(time) {
       # New model
-      new_model <- constructed_model(fitted_values, resids, data, distribution)
-      #statistic_star[time] <- statistic_fun(new_model)
-      statistic <- statistic_fun(new_model)
+      new_model <- updated_model(model, data, distribution)
+      statistic <- statistic_value(new_model, statistic)
 
       if (verbose) print(paste("Iteration: ", time))
       return(statistic)
@@ -178,8 +191,8 @@ dominguez_lobato_test <- function(
   test <- list(
     name_distribution = distribution,
     name_statistic = statistic,
-    statistic = statistic_value,
-    p_value = sum(statistic_star>=statistic_value)/times
+    statistic = statistic_v,
+    p_value = sum(statistic_star>=statistic_v)/times
   )
 
   # Calculating critical values
@@ -192,6 +205,7 @@ dominguez_lobato_test <- function(
   test <- dplyr::as_tibble(test)
 
   r_list <- list(test = test, bootstrap = sort(statistic_star))
+
   class(r_list) <- "dl_test"
 
   return(r_list)

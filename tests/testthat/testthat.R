@@ -14,9 +14,9 @@ y <- 1:10
 model <- lm(y~x-1)
 
 test_that("cvm_value works correctly",{
-  expect_equivalent(cvm_value(model), 0)
+  expect_equivalent(statistic_value(model, value = "cvm_value"), 0)
 })
 
 test_that("kmv_value works correctly",{
-  expect_equivalent(kmv_value(model), 0)
+  expect_equivalent(statistic_value(model, value = "kmv_value"), 0)
 })

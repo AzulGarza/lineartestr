@@ -22,51 +22,36 @@ presiduals <- function(fitted_values, resids){
   return(dist_values)
 }
 
-#' Calculates the Cramer von Mises value
-#' given an lm model with its residuals.
+#' Calculates the Cramer von Mises value or
+#' Kolmogorov value
+#' given a linear model compatible with
+#' `fitted.values` and `residuals` functions.
 #'
-#' @param model An lm model.
-#' @return The Cramer von Mises value of the model.
+#' @param model An existing fit from a linear model function.
+#' @param value Type of value to compute, can be `cvm_value` or `kmv_value`.
+#' @return The statistic value of the model.
 #' @examples
 #' x <- 1:10
 #' y <- 2*x + rnorm(10)
 #' model <- lm(y~x-1)
-#' cvm_value(model)
-cvm_value <- function(model){
+#' statistic_value(model)
+#' statistic_value(model, value = "cvm_value")
+#' statistic_value(model, value = "kmv_value")
+statistic_value <- function(model, value = "cvm_value"){
 
-  if(!inherits(model, "lm")){
-    stop("Model must be an lm model")
-  }
-
-  fitted_values <- model$fitted.values
-  resids <- model$residuals
+  fitted_values <- fitted.values(model)
+  resids <- residuals(model)
   n_obs <- length(fitted_values)
   presids <- presiduals(fitted_values, resids)
 
-  return(sum(presids**2)/(n_obs**2))
-}
+  if(value == "cvm_value"){
 
-#' Calculates the Kolmogorov value
-#' given an lm model with its residuals.
-#'
-#' @param model An lm model.
-#' @return The Kolmogorov value of the model.
-#' @examples
-#' x <- 1:10
-#' y <- 2*x + rnorm(10)
-#' model <- lm(y~x-1)
-#' kmv_value(model)
-kmv_value <- function(model){
+    return(sum(presids**2)/(n_obs**2))
 
-  if(!inherits(model, "lm")){
-    stop("Model must be an lm model")
+  } else if (value == "kmv_value"){
+
+    return(max(abs(presids)))
+
   }
-
-  fitted_values <- model$fitted.values
-  resids <- model$residuals
-  n_obs <- length(fitted_values)
-  presids <- presiduals(fitted_values, resids)
-
-  return(max(abs(presids)))
 }
 

@@ -16,7 +16,8 @@ model:
 
 ![formula](man/figures/CodeCogsEqn.gif)
 
-Using the Domínguez-Lobato test which relies on wild-bootstrap.
+Using the Domínguez-Lobato test which relies on wild-bootstrap. Also the
+Ramsey RESET test is implemented.
 
 ## Installation
 
@@ -34,7 +35,9 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("FedericoGarza/linearspectestr")
 ```
 
-## Example
+## Examples
+
+### Simplest linear models using `lm` function
 
 ``` r
 library(linearspectestr)
@@ -54,10 +57,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.4166667
-#> $ quantile_90       <dbl> 3.381346e-28
-#> $ quantile_95       <dbl> 4.197734e-28
-#> $ quantile_99       <dbl> 5.858133e-28
+#> $ p_value           <dbl> 0.3833333
+#> $ quantile_90       <dbl> 2.681806e-28
+#> $ quantile_95       <dbl> 4.058283e-28
+#> $ quantile_99       <dbl> 5.350507e-28
 ```
 
 Also `linearspectestr` can plot the results
@@ -68,7 +71,7 @@ plot_dl_test(dl_test)
 
 <img src="man/figures/README-plot-1.png" width="70%" />
 
-RUN IN PARALLEL\!
+#### Run in **parallel**\!
 
 ``` r
 library(linearspectestr)
@@ -87,11 +90,111 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.3566667
-#> $ quantile_90       <dbl> 1.707989e-20
-#> $ quantile_95       <dbl> 2.40952e-20
-#> $ quantile_99       <dbl> 5.134807e-20
+#> $ p_value           <dbl> 0.3233333
+#> $ quantile_90       <dbl> 1.604743e-20
+#> $ quantile_95       <dbl> 2.060992e-20
+#> $ quantile_99       <dbl> 4.672057e-20
 ```
+
+#### *RESET* test can also be used to test the linear hypothesis
+
+``` r
+library(linearspectestr)
+
+x <- 1:100 + rnorm(100)
+y <- 1:100
+
+lm_model <- lm(y~x)
+
+r_test <- reset_test(lm_model)
+```
+
+``` r
+dplyr::glimpse(r_test)
+#> Observations: 1
+#> Variables: 6
+#> $ statistic   <dbl> 1.969437
+#> $ p_value     <dbl> 0.3735444
+#> $ df          <int> 2
+#> $ quantile_90 <dbl> 4.60517
+#> $ quantile_95 <dbl> 5.991465
+#> $ quantile_99 <dbl> 9.21034
+```
+
+An then we can plot the
+results
+
+``` r
+plot_reset_test(r_test)
+```
+
+<img src="man/figures/README-plot_reset-1.png" width="70%" />
+
+### Linear fixed effects with [`lfe`](https://cran.r-project.org/web/packages/lfe/lfe.pdf)
+
+``` r
+library(linearspectestr)
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+library(lfe)
+#> Loading required package: Matrix
+
+# This example was taken from https://www.rdocumentation.org/packages/lfe/versions/2.8-5/topics/felm
+x <- rnorm(1000)
+x2 <- rnorm(length(x))
+# Individuals and firms
+id <- factor(sample(20,length(x),replace=TRUE))
+firm <- factor(sample(13,length(x),replace=TRUE))
+# Effects for them
+id.eff <- rnorm(nlevels(id))
+firm.eff <- rnorm(nlevels(firm))
+# Left hand side
+u <- rnorm(length(x))
+y <- x + 0.5*x2 + id.eff[id] + firm.eff[firm] + u
+new_y <- y + rnorm(length(y))
+## Estimate the model 
+est <- lfe::felm(y ~ x + x2 | id + firm)
+
+
+## Testing the linear hypothesis and plotting results
+dominguez_lobato_test(est, n_cores = 7) %>% 
+  plot_dl_test()
+```
+
+<img src="man/figures/README-example_lfe-1.png" width="70%" />
+
+### ARMA models
+
+``` r
+library(linearspectestr)
+library(dplyr)
+
+x <- rnorm(100)**3
+
+arma_model <- forecast::Arima(x, order = c(1, 0, 1))
+#> Registered S3 method overwritten by 'xts':
+#>   method     from
+#>   as.zoo.xts zoo
+#> Registered S3 method overwritten by 'quantmod':
+#>   method            from
+#>   as.zoo.data.frame zoo
+#> Registered S3 methods overwritten by 'forecast':
+#>   method             from    
+#>   fitted.fracdiff    fracdiff
+#>   residuals.fracdiff fracdiff
+
+dominguez_lobato_test(arma_model) %>% 
+  plot_dl_test()
+```
+
+<img src="man/figures/README-example_arma-1.png" width="70%" />
 
 ## References
 

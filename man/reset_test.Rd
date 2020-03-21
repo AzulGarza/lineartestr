@@ -6,15 +6,18 @@
 Tests the specification of a linear model adding squared and cubic
 fitted values.}
 \usage{
-reset_test(model, robust = F)
+reset_test(model, robust = F, quantiles = c(0.9, 0.95, 0.99))
 }
 \arguments{
-\item{model}{An lm model.}
+\item{model}{An existing fit from a model function such as `lm`, `lfe` and others
+compatible with `update`.}
 
-\item{robust}{Use robust varcov matrix.}
+\item{robust}{Use robust `varcov` matrix.}
+
+\item{quantiles}{Vector of quantiles to calculate pvalues.}
 }
 \value{
-A list with the Wald value and the corresponding pvalue.
+A `tibble` with the Wald value, the corresponding pvalue, and the quantiles of the distribution.
 }
 \description{
 Reset test.
@@ -26,4 +29,6 @@ x <- 1:10
 y <- 1:10
 model <- lm(y~x)
 reset_test(model)
+reset_test(model, robust = TRUE)
+reset_test(model, quantiles = c(.97))
 }
