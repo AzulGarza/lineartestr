@@ -3,16 +3,23 @@
 \name{reset_test}
 \alias{reset_test}
 \title{Reset test.
-Tests the specification of a linear model adding squared and cubic
-fitted values.}
+Tests the specification of a linear model adding and testing
+powers of fitted values.}
 \usage{
-reset_test(model, robust = F, quantiles = c(0.9, 0.95, 0.99))
+reset_test(
+  model,
+  robust = FALSE,
+  max_power = 3,
+  quantiles = c(0.9, 0.95, 0.99)
+)
 }
 \arguments{
 \item{model}{An existing fit from a model function such as `lm`, `lfe` and others
 compatible with `update`.}
 
 \item{robust}{Use robust `varcov` matrix.}
+
+\item{max_power}{Max power of fitted values to add.}
 
 \item{quantiles}{Vector of quantiles to calculate pvalues.}
 }
@@ -21,14 +28,16 @@ A `tibble` with the Wald value, the corresponding pvalue, and the quantiles of t
 }
 \description{
 Reset test.
-Tests the specification of a linear model adding squared and cubic
-fitted values.
+Tests the specification of a linear model adding and testing
+powers of fitted values.
 }
 \examples{
-x <- 1:10
+x <- 1:10  + rnorm(10)
 y <- 1:10
 model <- lm(y~x)
 reset_test(model)
 reset_test(model, robust = TRUE)
 reset_test(model, quantiles = c(.97))
+reset_test(model, max_power = 4)
+reset_test(model, robust = TRUE, max_power = 4)
 }

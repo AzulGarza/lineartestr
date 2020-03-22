@@ -77,44 +77,53 @@ wald_test <- function(model, restrictions, value, robust = F,  quantiles=c(.9, .
 }
 
 #' Reset test.
-#' Tests the specification of a linear model adding squared and cubic
-#' fitted values.
+#' Tests the specification of a linear model adding and testing
+#' powers of fitted values.
 #'
 #' @param model An existing fit from a model function such as `lm`, `lfe` and others
 #' compatible with `update`.
 #' @param robust Use robust `varcov` matrix.
+#' @param max_power Max power of fitted values to add.
 #' @param quantiles Vector of quantiles to calculate pvalues.
 #' @return A `tibble` with the Wald value, the corresponding pvalue, and the quantiles of the distribution.
 #' @examples
-#' x <- 1:10
+#' x <- 1:10  + rnorm(10)
 #' y <- 1:10
 #' model <- lm(y~x)
 #' reset_test(model)
 #' reset_test(model, robust = TRUE)
 #' reset_test(model, quantiles = c(.97))
-reset_test <- function(model, robust = F, quantiles=c(.9, .95, .99)){
+#' reset_test(model, max_power = 4)
+#' reset_test(model, robust = TRUE, max_power = 4)
+reset_test <- function(model, robust = FALSE, max_power = 3, quantiles=c(.9, .95, .99)){
 
   fitted_values <- fitted(model)
-  y_squared <- fitted_values^2
-  y_cubic <- fitted_values^3
   n_obs_pre <- length(coefficients(model))
   model_data <- model.frame(model)
 
-  model_data$y_squared <- y_squared
-  model_data$y_cubic <- y_cubic
 
+  powers <- 2:max_power
+  formula <- ". ~ . "
+  for(power in powers){
+    variable <- paste0("y_", power)
+    model_data[[variable]] <- fitted_values^power
+
+    formula <- paste0(formula, ' + ', variable)
+  }
   new_model <- update(
     model,
-    formula = . ~ . + y_squared + y_cubic,
+    formula = as.formula(formula),
     data = model_data
   )
 
+  n_test_vars <- max_power - 1
+
   restrictions <- cbind(
-    matrix(rep(0, 2*n_obs_pre), nrow = 2),
-    matrix(c(1,0,0,1), nrow = 2)
+    matrix(rep(0, n_test_vars*n_obs_pre), nrow = n_test_vars),
+    diag(n_test_vars)
   )
 
-  value <- matrix(c(0,0))
+  value <- matrix(rep(0, n_test_vars))
   wald <- wald_test(new_model, restrictions, value, robust, quantiles)
 
 
