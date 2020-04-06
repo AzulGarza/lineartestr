@@ -12,16 +12,16 @@ knitr::opts_chunk$set(
   out.width = "70%"
 )
 ```
-# linearspectestr
+# lineartestr
 
 <!-- badges: start -->
-![R-CMD-check](https://github.com/FedericoGarza/linearspectestr/workflows/R-CMD-check/badge.svg)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/linearspectestr/commits)
+![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/lineartestr/commits)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
 <!-- badges: end -->
 
-The goal of `linearspectestr` is to contrast the linear hypothesis of a model:
+The goal of `lineartestr` is to contrast the linear hypothesis of a model:
 
 
 ![formula](man/figures/CodeCogsEqn.gif)
@@ -31,24 +31,24 @@ Using the Domínguez-Lobato test which relies on wild-bootstrap. Also the Ramsey
 
 ## Installation
 
-You can install (soon) the released version of `linearspectestr` from [CRAN](https://CRAN.R-project.org) with:
+You can install (soon) the released version of `lineartestr` from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("linearspectestr")
+install.packages("lineartestr")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("FedericoGarza/linearspectestr")
+devtools::install_github("FedericoGarza/lineartestr")
 ```
 ## Examples
 
 ### Simplest linear models using `lm` function
 
 ```{r example}
-library(linearspectestr)
+library(lineartestr)
 
 x <- 1:100
 y <- 1:100
@@ -63,7 +63,7 @@ dl_test <- dominguez_lobato_test(lm_model)
 dplyr::glimpse(dl_test$test)
 ```
 
-Also `linearspectestr` can plot the results
+Also `lineartestr` can plot the results
 
 ```{r plot}
 plot_dl_test(dl_test)
@@ -72,7 +72,7 @@ plot_dl_test(dl_test)
 #### Run in **parallel**!
 
 ```{r example_parallel}
-library(linearspectestr)
+library(lineartestr)
 x_p <- 1:1e5
 y_p <- 1:1e5
 
@@ -89,7 +89,7 @@ dplyr::glimpse(dl_test_p$test)
 #### *RESET* test can also be used to test the linear hypothesis
 
 ```{r example_reset}
-library(linearspectestr)
+library(lineartestr)
 
 x <- 1:100 + rnorm(100)
 y <- 1:100
@@ -113,7 +113,7 @@ plot_reset_test(r_test)
 ### Linear fixed effects with [`lfe`](https://cran.r-project.org/web/packages/lfe/lfe.pdf)
 
 ```{r example_lfe}
-library(linearspectestr)
+library(lineartestr)
 library(dplyr)
 library(lfe)
 
@@ -142,7 +142,7 @@ dominguez_lobato_test(est, n_cores = 7) %>%
 ### ARMA models
 
 ```{r example_arma}
-library(linearspectestr)
+library(lineartestr)
 library(dplyr)
 
 x <- rnorm(100)**3

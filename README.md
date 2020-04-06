@@ -1,18 +1,18 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# linearspectestr
+# lineartestr
 
 <!-- badges: start -->
 
-![R-CMD-check](https://github.com/FedericoGarza/linearspectestr/workflows/R-CMD-check/badge.svg)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/linearspectestr/commits)
+![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/lineartestr/commits)
 [![MIT
 license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
 <!-- badges: end -->
 
-The goal of `linearspectestr` is to contrast the linear hypothesis of a
+The goal of `lineartestr` is to contrast the linear hypothesis of a
 model:
 
 ![formula](man/figures/CodeCogsEqn.gif)
@@ -22,18 +22,18 @@ Ramsey RESET test is implemented.
 
 ## Installation
 
-You can install (soon) the released version of `linearspectestr` from
+You can install (soon) the released version of `lineartestr` from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("linearspectestr")
+install.packages("lineartestr")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("FedericoGarza/linearspectestr")
+devtools::install_github("FedericoGarza/lineartestr")
 ```
 
 ## Examples
@@ -41,7 +41,7 @@ devtools::install_github("FedericoGarza/linearspectestr")
 ### Simplest linear models using `lm` function
 
 ``` r
-library(linearspectestr)
+library(lineartestr)
 
 x <- 1:100
 y <- 1:100
@@ -58,13 +58,13 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.4133333
-#> $ quantile_90       <dbl> 2.437899e-28
-#> $ quantile_95       <dbl> 3.943113e-28
-#> $ quantile_99       <dbl> 7.069412e-28
+#> $ p_value           <dbl> 0.4666667
+#> $ quantile_90       <dbl> 3.2413e-28
+#> $ quantile_95       <dbl> 4.136152e-28
+#> $ quantile_99       <dbl> 6.359165e-28
 ```
 
-Also `linearspectestr` can plot the results
+Also `lineartestr` can plot the results
 
 ``` r
 plot_dl_test(dl_test)
@@ -75,7 +75,7 @@ plot_dl_test(dl_test)
 #### Run in **parallel**\!
 
 ``` r
-library(linearspectestr)
+library(lineartestr)
 x_p <- 1:1e5
 y_p <- 1:1e5
 
@@ -91,16 +91,16 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.3433333
-#> $ quantile_90       <dbl> 1.72606e-20
-#> $ quantile_95       <dbl> 2.523203e-20
-#> $ quantile_99       <dbl> 3.641144e-20
+#> $ p_value           <dbl> 0.3133333
+#> $ quantile_90       <dbl> 1.59876e-20
+#> $ quantile_95       <dbl> 2.488889e-20
+#> $ quantile_99       <dbl> 3.662429e-20
 ```
 
 #### *RESET* test can also be used to test the linear hypothesis
 
 ``` r
-library(linearspectestr)
+library(lineartestr)
 
 x <- 1:100 + rnorm(100)
 y <- 1:100
@@ -114,8 +114,8 @@ r_test <- reset_test(lm_model)
 dplyr::glimpse(r_test)
 #> Observations: 1
 #> Variables: 6
-#> $ statistic   <dbl> 0.1608255
-#> $ p_value     <dbl> 0.9227354
+#> $ statistic   <dbl> 3.799902
+#> $ p_value     <dbl> 0.149576
 #> $ df          <int> 2
 #> $ quantile_90 <dbl> 4.60517
 #> $ quantile_95 <dbl> 5.991465
@@ -134,7 +134,7 @@ plot_reset_test(r_test)
 ### Linear fixed effects with [`lfe`](https://cran.r-project.org/web/packages/lfe/lfe.pdf)
 
 ``` r
-library(linearspectestr)
+library(lineartestr)
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
@@ -174,7 +174,7 @@ dominguez_lobato_test(est, n_cores = 7) %>%
 ### ARMA models
 
 ``` r
-library(linearspectestr)
+library(lineartestr)
 library(dplyr)
 
 x <- rnorm(100)**3
@@ -203,4 +203,3 @@ dominguez_lobato_test(arma_model) %>%
     testing with estimated
     variables.](https://www.tandfonline.com/doi/citedby/10.1080/07474938.2019.1687116?)
     Econometric Reviews.
-  -

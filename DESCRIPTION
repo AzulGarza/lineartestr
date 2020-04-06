@@ -1,8 +1,8 @@
-Package: linearspectestr
+Package: lineartestr
 Type: Package
 Title: Linear Specification Testing with Estimated Variables
 Version: 0.1.0
-Author: Federico Garza
+Authors@R: person("Federico", "Garza", , "fede.garza.ramirez@gmail.com", role = c("aut", "cre"))
 Maintainer: Federico Garza <fede.garza.ramirez@gmail.com>
 Description: Tests if the linear hypothesis of a model
     is correct specified, using reset and Dominguez Lobato tests.
@@ -22,3 +22,5 @@ Imports:
 Suggests: 
     testthat
 RoxygenNote: 7.0.2
+URL: https://github.com/FedericoGarza/lineartestr
+BugReports: https://github.com/FedericoGarza/lineartestr/issues
