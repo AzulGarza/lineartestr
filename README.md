@@ -7,9 +7,6 @@
 
 ![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/lineartestr/commits)
-[![MIT
-license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
-
 <!-- badges: end -->
 
 The goal of `lineartestr` is to contrast the linear hypothesis of a
@@ -58,10 +55,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.4666667
-#> $ quantile_90       <dbl> 3.2413e-28
-#> $ quantile_95       <dbl> 4.136152e-28
-#> $ quantile_99       <dbl> 6.359165e-28
+#> $ p_value           <dbl> 0.46
+#> $ quantile_90       <dbl> 2.528087e-28
+#> $ quantile_95       <dbl> 3.45966e-28
+#> $ quantile_99       <dbl> 6.732529e-28
 ```
 
 Also `lineartestr` can plot the results
@@ -91,10 +88,10 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.3133333
-#> $ quantile_90       <dbl> 1.59876e-20
-#> $ quantile_95       <dbl> 2.488889e-20
-#> $ quantile_99       <dbl> 3.662429e-20
+#> $ p_value           <dbl> 0.2833333
+#> $ quantile_90       <dbl> 1.516086e-20
+#> $ quantile_95       <dbl> 2.138596e-20
+#> $ quantile_99       <dbl> 3.798618e-20
 ```
 
 #### *RESET* test can also be used to test the linear hypothesis
@@ -114,8 +111,8 @@ r_test <- reset_test(lm_model)
 dplyr::glimpse(r_test)
 #> Observations: 1
 #> Variables: 6
-#> $ statistic   <dbl> 3.799902
-#> $ p_value     <dbl> 0.149576
+#> $ statistic   <dbl> 6.392148
+#> $ p_value     <dbl> 0.04092254
 #> $ df          <int> 2
 #> $ quantile_90 <dbl> 4.60517
 #> $ quantile_95 <dbl> 5.991465
