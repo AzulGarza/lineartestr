@@ -58,7 +58,7 @@ wald_test <- function(model, restrictions, value, robust = F,  quantiles=c(.9, .
   if(!robust){
     asy_var_theta <- solve(restrictions%*%vcov(model)%*%t(restrictions))
   } else {
-    asy_var_theta <- solve(restrictions%*%sandwich::vcovHC(model, type = "HC1")%*%t(restrictions))
+    asy_var_theta <- solve(restrictions%*%sandwich::vcovHC(model, type = "HC0")%*%t(restrictions))
   }
 
   wald_test$statistic <- as.numeric(t(theta)%*%asy_var_theta%*%theta)
