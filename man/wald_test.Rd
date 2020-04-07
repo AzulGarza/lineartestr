@@ -10,6 +10,7 @@ wald_test(
   restrictions,
   value,
   robust = F,
+  vcov = NULL,
   quantiles = c(0.9, 0.95, 0.99)
 )
 }
@@ -23,6 +24,8 @@ for free restrictions use zeros.}
 \item{value}{Values of restrictions.}
 
 \item{robust}{Use robust `varcov` matrix.}
+
+\item{vcov}{Particular variance and covariances matrix.}
 
 \item{quantiles}{Vector of quantiles to calculate pvalues.}
 }

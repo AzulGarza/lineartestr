@@ -9,6 +9,7 @@ powers of fitted values.}
 reset_test(
   model,
   robust = FALSE,
+  vcov = NULL,
   max_power = 3,
   quantiles = c(0.9, 0.95, 0.99)
 )
@@ -18,6 +19,8 @@ reset_test(
 compatible with `update`.}
 
 \item{robust}{Use robust `varcov` matrix.}
+
+\item{vcov}{Particular variance and covariances matrix.}
 
 \item{max_power}{Max power of fitted values to add.}
 

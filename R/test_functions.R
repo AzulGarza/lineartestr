@@ -10,6 +10,7 @@
 #' for free restrictions use zeros.
 #' @param value Values of restrictions.
 #' @param robust Use robust `varcov` matrix.
+#' @param vcov Particular variance and covariances matrix.
 #' @param quantiles Vector of quantiles to calculate pvalues.
 #' @return A `tibbble` with the Wald value, the corresponding pvalue and the quantiles of the distribution.
 #' @examples
@@ -22,7 +23,7 @@
 #' wald_test(model, restrictions, value)
 #' wald_test(model, restrictions, value, robust = TRUE)
 #' wald_test(model, restrictions, value, quantiles = c(.97))
-wald_test <- function(model, restrictions, value, robust = F,  quantiles=c(.9, .95, .99)){
+wald_test <- function(model, restrictions, value, robust = F, vcov = NULL, quantiles=c(.9, .95, .99)){
 
   if(!inherits(restrictions, "matrix")){
     stop("restrictions and value must be a matrix class")
@@ -55,11 +56,12 @@ wald_test <- function(model, restrictions, value, robust = F,  quantiles=c(.9, .
   wald_test <- list(statistic = NULL, p_value = NULL, df = n_rest)
   theta <- restrictions%*%coefs - value
 
-  if(!robust){
-    asy_var_theta <- solve(restrictions%*%vcov(model)%*%t(restrictions))
-  } else {
-    asy_var_theta <- solve(restrictions%*%sandwich::vcovHC(model)%*%t(restrictions))
+
+  vcov0 <- if(!is.null(vcov)) vcov else {
+    if(!robust) stats::vcov else sandwich::vcovHC
   }
+
+  asy_var_theta <- solve(restrictions%*%vcov0(model)%*%t(restrictions))
 
   wald_test$statistic <- as.numeric(t(theta)%*%asy_var_theta%*%theta)
   wald_test$p_value <- pchisq(wald_test$statistic, df = n_rest, lower.tail = FALSE)
@@ -83,6 +85,7 @@ wald_test <- function(model, restrictions, value, robust = F,  quantiles=c(.9, .
 #' @param model An existing fit from a model function such as `lm`, `lfe` and others
 #' compatible with `update`.
 #' @param robust Use robust `varcov` matrix.
+#' @param vcov Particular variance and covariances matrix.
 #' @param max_power Max power of fitted values to add.
 #' @param quantiles Vector of quantiles to calculate pvalues.
 #' @return A `tibble` with the Wald value, the corresponding pvalue, and the quantiles of the distribution.
@@ -95,7 +98,7 @@ wald_test <- function(model, restrictions, value, robust = F,  quantiles=c(.9, .
 #' reset_test(model, quantiles = c(.97))
 #' reset_test(model, max_power = 4)
 #' reset_test(model, robust = TRUE, max_power = 4)
-reset_test <- function(model, robust = FALSE, max_power = 3, quantiles=c(.9, .95, .99)){
+reset_test <- function(model, robust = FALSE, vcov = NULL, max_power = 3, quantiles=c(.9, .95, .99)){
 
   fitted_values <- fitted(model)
   n_obs_pre <- length(coefficients(model))
@@ -125,7 +128,7 @@ reset_test <- function(model, robust = FALSE, max_power = 3, quantiles=c(.9, .95
 
   value <- matrix(rep(0, n_test_vars))
 
-  wald <- wald_test(new_model, restrictions, value, robust, quantiles)
+  wald <- wald_test(new_model, restrictions, value, robust, vcov, quantiles)
 
   class(wald) <- append(class(wald), "reset_test")
 
