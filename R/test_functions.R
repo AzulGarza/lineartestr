@@ -58,11 +58,11 @@ wald_test <- function(model, restrictions, value, robust = F,  quantiles=c(.9, .
   if(!robust){
     asy_var_theta <- solve(restrictions%*%vcov(model)%*%t(restrictions))
   } else {
-    asy_var_theta <- solve(restrictions%*%sandwich::vcovHC(model, type = "HC0")%*%t(restrictions))
+    asy_var_theta <- solve(restrictions%*%sandwich::vcovHC(model)%*%t(restrictions))
   }
 
   wald_test$statistic <- as.numeric(t(theta)%*%asy_var_theta%*%theta)
-  wald_test$p_value <- 1-pchisq(wald_test$statistic, df = n_rest)
+  wald_test$p_value <- pchisq(wald_test$statistic, df = n_rest, lower.tail = FALSE)
 
   # Calculating critical values
   calculated_quantiles <- qchisq(quantiles, df = n_rest)
@@ -124,8 +124,8 @@ reset_test <- function(model, robust = FALSE, max_power = 3, quantiles=c(.9, .95
   )
 
   value <- matrix(rep(0, n_test_vars))
-  wald <- wald_test(new_model, restrictions, value, robust, quantiles)
 
+  wald <- wald_test(new_model, restrictions, value, robust, quantiles)
 
   class(wald) <- append(class(wald), "reset_test")
 
