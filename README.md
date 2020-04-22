@@ -7,8 +7,8 @@
 
 ![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)
 ![CRAN](https://www.r-pkg.org/badges/version/lineartestr)
-![Downloads](http://cranlogs.r-pkg.org/badges/lineartestr) ![License:
-MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Downloads](http://cranlogs.r-pkg.org/badges/lineartestr)
+[![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.en.html)
 <!-- badges: end -->
 
 The goal of `lineartestr` is to contrast the linear hypothesis of a
@@ -57,10 +57,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.43
-#> $ quantile_90       <dbl> 2.9768e-28
-#> $ quantile_95       <dbl> 4.183055e-28
-#> $ quantile_99       <dbl> 7.471059e-28
+#> $ p_value           <dbl> 0.4266667
+#> $ quantile_90       <dbl> 3.163363e-28
+#> $ quantile_95       <dbl> 3.999764e-28
+#> $ quantile_99       <dbl> 5.197076e-28
 ```
 
 Also `lineartestr` can plot the results
@@ -90,10 +90,10 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.3366667
-#> $ quantile_90       <dbl> 1.89421e-20
-#> $ quantile_95       <dbl> 2.921827e-20
-#> $ quantile_99       <dbl> 4.815146e-20
+#> $ p_value           <dbl> 0.34
+#> $ quantile_90       <dbl> 1.764859e-20
+#> $ quantile_95       <dbl> 2.829001e-20
+#> $ quantile_99       <dbl> 4.409119e-20
 ```
 
 #### *RESET* test can also be used to test the linear hypothesis
@@ -113,8 +113,8 @@ r_test <- reset_test(lm_model)
 dplyr::glimpse(r_test)
 #> Observations: 1
 #> Variables: 6
-#> $ statistic   <dbl> 1.326029
-#> $ p_value     <dbl> 0.5152955
+#> $ statistic   <dbl> 2.983099
+#> $ p_value     <dbl> 0.2250237
 #> $ df          <int> 2
 #> $ quantile_90 <dbl> 4.60517
 #> $ quantile_95 <dbl> 5.991465
@@ -159,12 +159,12 @@ firm.eff <- rnorm(nlevels(firm))
 u <- rnorm(length(x))
 y <- x + 0.5*x2 + id.eff[id] + firm.eff[firm] + u
 new_y <- y + rnorm(length(y))
-## Estimate the model 
+## Estimate the model
 est <- lfe::felm(y ~ x + x2 | id + firm)
 
 
 ## Testing the linear hypothesis and plotting results
-dominguez_lobato_test(est, n_cores = 7) %>% 
+dominguez_lobato_test(est, n_cores = 7) %>%
   plot_dl_test()
 ```
 
@@ -190,7 +190,7 @@ arma_model <- forecast::Arima(x, order = c(1, 0, 1))
 #>   fitted.fracdiff    fracdiff
 #>   residuals.fracdiff fracdiff
 
-dominguez_lobato_test(arma_model) %>% 
+dominguez_lobato_test(arma_model) %>%
   plot_dl_test()
 ```
 

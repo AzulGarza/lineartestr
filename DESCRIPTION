@@ -1,13 +1,15 @@
 Package: lineartestr
 Type: Package
 Title: Linear Specification Testing with Estimated Variables
-Version: 0.1.0
-Authors@R: person("Federico", "Garza", , "fede.garza.ramirez@gmail.com", role = c("aut", "cre"))
+Version: 1.0.0
+Authors@R: person("Federico", "Garza", , "fede.garza.ramirez@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-7015-8186"))
 Maintainer: Federico Garza <fede.garza.ramirez@gmail.com>
 Description: Tests if the linear hypothesis of a model
     is correct specified, using reset and Dominguez Lobato tests.
 License: GPL (>= 2) | file LICENSE
 Encoding: UTF-8
+Depends:
+    R (> 3.2)
 LazyData: true
 Imports:
     Matrix,
@@ -19,7 +21,7 @@ Imports:
     readr,
     parallel,
     forecast
-Suggests: 
+Suggests:
     testthat
 RoxygenNote: 7.0.2
 URL: https://github.com/FedericoGarza/lineartestr

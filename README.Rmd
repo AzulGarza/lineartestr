@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)
 ![CRAN](https://www.r-pkg.org/badges/version/lineartestr)
 ![Downloads](http://cranlogs.r-pkg.org/badges/lineartestr)
-![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+[![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.en.html)
 <!-- badges: end -->
 
 The goal of `lineartestr` is to contrast the linear hypothesis of a model:
@@ -130,12 +130,12 @@ firm.eff <- rnorm(nlevels(firm))
 u <- rnorm(length(x))
 y <- x + 0.5*x2 + id.eff[id] + firm.eff[firm] + u
 new_y <- y + rnorm(length(y))
-## Estimate the model 
+## Estimate the model
 est <- lfe::felm(y ~ x + x2 | id + firm)
 
 
 ## Testing the linear hypothesis and plotting results
-dominguez_lobato_test(est, n_cores = 7) %>% 
+dominguez_lobato_test(est, n_cores = 7) %>%
   plot_dl_test()
 ```
 
@@ -149,7 +149,7 @@ x <- rnorm(100)**3
 
 arma_model <- forecast::Arima(x, order = c(1, 0, 1))
 
-dominguez_lobato_test(arma_model) %>% 
+dominguez_lobato_test(arma_model) %>%
   plot_dl_test()
 ```
 
