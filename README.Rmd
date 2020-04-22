@@ -16,7 +16,9 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 ![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/lineartestr/commits)
+![CRAN](https://www.r-pkg.org/badges/version/lineartestr)
+![Downloads](http://cranlogs.r-pkg.org/badges/lineartestr)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 <!-- badges: end -->
 
 The goal of `lineartestr` is to contrast the linear hypothesis of a model:
