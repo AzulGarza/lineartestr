@@ -1,7 +1,7 @@
 
 # Specification tests ------------------------------------------------------
 
-#' Custom Wald test.
+#' Wald test.
 #' Tests restrictions*coefficients = value.
 #'
 #' @param model Model compatible with
@@ -137,7 +137,8 @@ reset_test <- function(model, robust = FALSE, vcov = NULL, max_power = 3, quanti
 
 #' Tests the specification of a linear model using wild-bootstrap.
 #'
-#' @param model An lm model.
+#' @param model An existing fit from a model function such as `lm`, `lfe` and others
+#' compatible with `update`.
 #' @param distribution Type of noise added to residuals, ej `rnorm` or `rrademacher`.
 #' @param statistic Type of statistic to be used, can be one of `cvm_value` or `kmv_value`.
 #' @param times Number of bootstrap samples.

@@ -13,9 +13,6 @@ rmammen_point <- function(n){
 
   # Binominal
   res <- rbinom(n, size = 1, prob = gold)
-
-  # If it is 1, it must be -(srt(5)-1)/2
-  # if it is 0 then (sqrt(5)+1)/2
   res_f <- ifelse(res == 1, -(sqrt_5-1)/2, (sqrt_5+1)/2)
 
   # Result
@@ -58,9 +55,6 @@ rmammen_cont <- function(n){
 rrademacher <- function(n){
   # Binominal
   res <- rbinom(n, size = 1, prob = 0.5)
-
-  # If it is 1, it must be -(srt(5)-1)/2
-  # if it is 0 then (sqrt(5)+1)/2
   res_f <- ifelse(res == 0, -1, res)
 
   # Result
