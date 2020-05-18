@@ -2,7 +2,7 @@
 % Please edit documentation in R/test_functions.R
 \name{wald_test}
 \alias{wald_test}
-\title{Custom Wald test.
+\title{Wald test.
 Tests restrictions*coefficients = value.}
 \usage{
 wald_test(
@@ -33,7 +33,7 @@ for free restrictions use zeros.}
 A `tibbble` with the Wald value, the corresponding pvalue and the quantiles of the distribution.
 }
 \description{
-Custom Wald test.
+Wald test.
 Tests restrictions*coefficients = value.
 }
 \examples{

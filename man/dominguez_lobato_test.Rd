@@ -15,7 +15,8 @@ dominguez_lobato_test(
 )
 }
 \arguments{
-\item{model}{An lm model.}
+\item{model}{An existing fit from a model function such as `lm`, `lfe` and others
+compatible with `update`.}
 
 \item{distribution}{Type of noise added to residuals, ej `rnorm` or `rrademacher`.}
 
