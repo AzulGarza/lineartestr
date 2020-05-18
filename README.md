@@ -21,7 +21,7 @@ Ramsey RESET test is implemented.
 
 ## Installation
 
-You can install (soon) the released version of `lineartestr` from
+You can install the released version of `lineartestr` from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
@@ -57,10 +57,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.4266667
-#> $ quantile_90       <dbl> 3.163363e-28
-#> $ quantile_95       <dbl> 3.999764e-28
-#> $ quantile_99       <dbl> 5.197076e-28
+#> $ p_value           <dbl> 0.37
+#> $ quantile_90       <dbl> 2.345718e-28
+#> $ quantile_95       <dbl> 3.641501e-28
+#> $ quantile_99       <dbl> 5.749889e-28
 ```
 
 Also `lineartestr` can plot the results
@@ -90,10 +90,10 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.34
-#> $ quantile_90       <dbl> 1.764859e-20
-#> $ quantile_95       <dbl> 2.829001e-20
-#> $ quantile_99       <dbl> 4.409119e-20
+#> $ p_value           <dbl> 0.3633333
+#> $ quantile_90       <dbl> 1.826202e-20
+#> $ quantile_95       <dbl> 2.629817e-20
+#> $ quantile_99       <dbl> 4.179079e-20
 ```
 
 #### *RESET* test can also be used to test the linear hypothesis
@@ -113,8 +113,8 @@ r_test <- reset_test(lm_model)
 dplyr::glimpse(r_test)
 #> Observations: 1
 #> Variables: 6
-#> $ statistic   <dbl> 2.983099
-#> $ p_value     <dbl> 0.2250237
+#> $ statistic   <dbl> 1.90962
+#> $ p_value     <dbl> 0.3848852
 #> $ df          <int> 2
 #> $ quantile_90 <dbl> 4.60517
 #> $ quantile_95 <dbl> 5.991465

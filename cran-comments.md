@@ -1,14 +1,14 @@
 ## Test environments
 
-* Local Ubuntu install, R 3.6.1
-* win-builder (release)
+* Local Ubuntu install, R 3.6
+* windows-latest, R 3.6
+* macOS-latest, R 3.6
+* macOS-latest, devel
+* ubuntu-16.04, R 3.3
+* ubuntu-16.04, R 3.4
+* ubuntu-16.04, R 3.5
+* ubuntu-16.04, R 3.6
 
 ## R CMD check results
 
-0 ERRORs | 0 WARNINGs | 1 NOTE
-
-* checking R code for possible problems ... NOTE Undefined global functions or variables: prob statistic
-
-That variables are column names of a dataframe. The note arises because of dplyr notation.
-
-
+0 ERRORs | 0 WARNINGs | 0 NOTE

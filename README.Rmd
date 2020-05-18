@@ -31,7 +31,7 @@ Using the Domínguez-Lobato test which relies on wild-bootstrap. Also the Ramsey
 
 ## Installation
 
-You can install (soon) the released version of `lineartestr` from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of `lineartestr` from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("lineartestr")
