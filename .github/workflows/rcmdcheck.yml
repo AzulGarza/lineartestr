@@ -3,6 +3,7 @@ on:
     branches:
       - master
       - joss
+      - dev
   pull_request:
     branches:
       - master
