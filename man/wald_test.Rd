@@ -43,7 +43,7 @@ y <- 1:10
 model <- lm(y~x+z)
 restrictions <- diag(3)
 value <-  as.matrix(c(0, 0, 0))
-wald_test(model, restrictions, value)
-wald_test(model, restrictions, value, robust = TRUE)
-wald_test(model, restrictions, value, quantiles = c(.97))
+w_test <- wald_test(model, restrictions, value)
+w_test <- wald_test(model, restrictions, value, robust = TRUE)
+w_test <- wald_test(model, restrictions, value, quantiles = c(.97))
 }

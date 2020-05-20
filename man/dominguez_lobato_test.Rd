@@ -37,12 +37,13 @@ A list with dataframe results and the ordered values of each bootstrap iteration
 Tests the specification of a linear model using wild-bootstrap.
 }
 \examples{
-x <- 1:10
+
+x <- 1:10 + rnorm(10)
 y <- 1:10
-model <- lm(y~x-1)
-dominguez_lobato_test(model)
-dominguez_lobato_test(model, distribution = "rmammen_point", statistic = "kmv_value")
-dominguez_lobato_test(model, times = 100)
+model <- lm(y~x)
+dl_test <- dominguez_lobato_test(model)
+dl_test <- dominguez_lobato_test(model, distribution = "rmammen_point", statistic = "kmv_value")
+dl_test <- dominguez_lobato_test(model, times = 100)
 }
 \references{
 Manuel A. Dominguez and Ignacio N. Lobato (2019).

@@ -38,9 +38,9 @@ powers of fitted values.
 x <- 1:10  + rnorm(10)
 y <- 1:10
 model <- lm(y~x)
-reset_test(model)
-reset_test(model, robust = TRUE)
-reset_test(model, quantiles = c(.97))
-reset_test(model, max_power = 4)
-reset_test(model, robust = TRUE, max_power = 4)
+r_test <- reset_test(model)
+r_test <- reset_test(model, robust = TRUE)
+r_test <- reset_test(model, quantiles = c(.97))
+r_test <- reset_test(model, max_power = 4)
+r_test <- reset_test(model, robust = TRUE, max_power = 4)
 }

@@ -20,9 +20,9 @@
 #' model <- lm(y~x+z)
 #' restrictions <- diag(3)
 #' value <-  as.matrix(c(0, 0, 0))
-#' wald_test(model, restrictions, value)
-#' wald_test(model, restrictions, value, robust = TRUE)
-#' wald_test(model, restrictions, value, quantiles = c(.97))
+#' w_test <- wald_test(model, restrictions, value)
+#' w_test <- wald_test(model, restrictions, value, robust = TRUE)
+#' w_test <- wald_test(model, restrictions, value, quantiles = c(.97))
 wald_test <- function(model, restrictions, value, robust = F, vcov = NULL, quantiles=c(.9, .95, .99)){
 
   if(!inherits(restrictions, "matrix")){
@@ -93,11 +93,11 @@ wald_test <- function(model, restrictions, value, robust = F, vcov = NULL, quant
 #' x <- 1:10  + rnorm(10)
 #' y <- 1:10
 #' model <- lm(y~x)
-#' reset_test(model)
-#' reset_test(model, robust = TRUE)
-#' reset_test(model, quantiles = c(.97))
-#' reset_test(model, max_power = 4)
-#' reset_test(model, robust = TRUE, max_power = 4)
+#' r_test <- reset_test(model)
+#' r_test <- reset_test(model, robust = TRUE)
+#' r_test <- reset_test(model, quantiles = c(.97))
+#' r_test <- reset_test(model, max_power = 4)
+#' r_test <- reset_test(model, robust = TRUE, max_power = 4)
 reset_test <- function(model, robust = FALSE, vcov = NULL, max_power = 3, quantiles=c(.9, .95, .99)){
 
   fitted_values <- fitted(model)
@@ -149,12 +149,13 @@ reset_test <- function(model, robust = FALSE, vcov = NULL, max_power = 3, quanti
 #' @references Manuel A. Dominguez and Ignacio N. Lobato (2019).
 #' Specification Testing with Estimated Variables. Econometric Reviews.
 #' @examples
-#' x <- 1:10
+#'
+#' x <- 1:10 + rnorm(10)
 #' y <- 1:10
-#' model <- lm(y~x-1)
-#' dominguez_lobato_test(model)
-#' dominguez_lobato_test(model, distribution = "rmammen_point", statistic = "kmv_value")
-#' dominguez_lobato_test(model, times = 100)
+#' model <- lm(y~x)
+#' dl_test <- dominguez_lobato_test(model)
+#' dl_test <- dominguez_lobato_test(model, distribution = "rmammen_point", statistic = "kmv_value")
+#' dl_test <- dominguez_lobato_test(model, times = 100)
 dominguez_lobato_test <- function(
     model,
     distribution = "rnorm",
