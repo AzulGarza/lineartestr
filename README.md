@@ -19,6 +19,13 @@ model:
 Using the Domínguez-Lobato test which relies on wild-bootstrap. Also the
 Ramsey RESET test is implemented.
 
+## References
+
+  - Manuel A. Domínguez and Ignacio N. Lobato (2019). [Specification
+    testing with estimated
+    variables.](https://www.tandfonline.com/doi/citedby/10.1080/07474938.2019.1687116?)
+    Econometric Reviews.
+
 ## Installation
 
 You can install the released version of `lineartestr` from
@@ -57,10 +64,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.37
-#> $ quantile_90       <dbl> 2.345718e-28
-#> $ quantile_95       <dbl> 3.641501e-28
-#> $ quantile_99       <dbl> 5.749889e-28
+#> $ p_value           <dbl> 0.42
+#> $ quantile_90       <dbl> 2.903875e-28
+#> $ quantile_95       <dbl> 3.660387e-28
+#> $ quantile_99       <dbl> 5.240289e-28
 ```
 
 Also `lineartestr` can plot the results
@@ -90,10 +97,10 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.3633333
-#> $ quantile_90       <dbl> 1.826202e-20
-#> $ quantile_95       <dbl> 2.629817e-20
-#> $ quantile_99       <dbl> 4.179079e-20
+#> $ p_value           <dbl> 0.29
+#> $ quantile_90       <dbl> 1.597342e-20
+#> $ quantile_95       <dbl> 2.599619e-20
+#> $ quantile_99       <dbl> 4.303673e-20
 ```
 
 #### *RESET* test can also be used to test the linear hypothesis
@@ -113,8 +120,8 @@ r_test <- reset_test(lm_model)
 dplyr::glimpse(r_test)
 #> Observations: 1
 #> Variables: 6
-#> $ statistic   <dbl> 1.90962
-#> $ p_value     <dbl> 0.3848852
+#> $ statistic   <dbl> 0.1049317
+#> $ p_value     <dbl> 0.9488867
 #> $ df          <int> 2
 #> $ quantile_90 <dbl> 4.60517
 #> $ quantile_95 <dbl> 5.991465
@@ -130,7 +137,7 @@ plot_reset_test(r_test)
 
 <img src="man/figures/README-plot_reset-1.png" width="70%" />
 
-### Linear fixed effects with [`lfe`](https://cran.r-project.org/web/packages/lfe/lfe.pdf)
+### Linear fixed effects with [`lfe`](https://cran.R-project.org/web/packages/lfe/lfe.pdf)
 
 ``` r
 library(lineartestr)
@@ -195,10 +202,3 @@ dominguez_lobato_test(arma_model) %>%
 ```
 
 <img src="man/figures/README-example_arma-1.png" width="70%" />
-
-## References
-
-  - Manuel A. Domínguez and Ignacio N. Lobato (2019). [Specification
-    testing with estimated
-    variables.](https://www.tandfonline.com/doi/citedby/10.1080/07474938.2019.1687116?)
-    Econometric Reviews.

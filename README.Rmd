@@ -29,6 +29,10 @@ The goal of `lineartestr` is to contrast the linear hypothesis of a model:
 
 Using the Domínguez-Lobato test which relies on wild-bootstrap. Also the Ramsey RESET test is implemented.
 
+## References
+
+* Manuel A. Domínguez and Ignacio N. Lobato (2019). [Specification testing with estimated variables.](https://www.tandfonline.com/doi/citedby/10.1080/07474938.2019.1687116?) Econometric Reviews.
+
 ## Installation
 
 You can install the released version of `lineartestr` from [CRAN](https://CRAN.R-project.org) with:
@@ -110,7 +114,7 @@ An then we can plot the results
 plot_reset_test(r_test)
 ```
 
-### Linear fixed effects with [`lfe`](https://cran.r-project.org/web/packages/lfe/lfe.pdf)
+### Linear fixed effects with [`lfe`](https://cran.R-project.org/web/packages/lfe/lfe.pdf)
 
 ```{r example_lfe}
 library(lineartestr)
@@ -153,7 +157,3 @@ dominguez_lobato_test(arma_model) %>%
   plot_dl_test()
 ```
 
-
-## References
-
-* Manuel A. Domínguez and Ignacio N. Lobato (2019). [Specification testing with estimated variables.](https://www.tandfonline.com/doi/citedby/10.1080/07474938.2019.1687116?) Econometric Reviews.
