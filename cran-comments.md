@@ -1,14 +1,16 @@
 ## Test environments
-
-* Local Ubuntu install, R 3.6.1
-* win-builder (release)
+- R-hub windows-x86_64-devel (r-devel)
+- R-hub ubuntu-gcc-release (r-release)
+- R-hub fedora-clang-devel (r-devel)
 
 ## R CMD check results
+> On windows-x86_64-devel (r-devel), ubuntu-gcc-release (r-release), fedora-clang-devel (r-devel)
+  checking CRAN incoming feasibility ... NOTE
+  
+  New submission
+  Maintainer: 'Federico Garza <fede.garza.ramirez@gmail.com>'
+  
+  Possibly mis-spelled words in DESCRIPTION:
+    Lobato (8:53)
 
-0 ERRORs | 0 WARNINGs | 1 NOTE
-
-* checking R code for possible problems ... NOTE Undefined global functions or variables: prob statistic
-
-That variables are column names of a dataframe. The note arises because of dplyr notation.
-
-
+0 errors ✓ | 0 warnings ✓ | 1 note x

@@ -6,7 +6,9 @@
 <!-- badges: start -->
 
 ![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/FedericoGarza/lineartestr/commits)
+![CRAN](https://www.r-pkg.org/badges/version/lineartestr)
+![Downloads](http://cranlogs.r-pkg.org/badges/lineartestr)
+[![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.en.html)
 <!-- badges: end -->
 
 The goal of `lineartestr` is to contrast the linear hypothesis of a
@@ -19,7 +21,7 @@ Ramsey RESET test is implemented.
 
 ## Installation
 
-You can install (soon) the released version of `lineartestr` from
+You can install the released version of `lineartestr` from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
@@ -55,10 +57,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.46
-#> $ quantile_90       <dbl> 2.528087e-28
-#> $ quantile_95       <dbl> 3.45966e-28
-#> $ quantile_99       <dbl> 6.732529e-28
+#> $ p_value           <dbl> 0.37
+#> $ quantile_90       <dbl> 2.345718e-28
+#> $ quantile_95       <dbl> 3.641501e-28
+#> $ quantile_99       <dbl> 5.749889e-28
 ```
 
 Also `lineartestr` can plot the results
@@ -88,10 +90,10 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.2833333
-#> $ quantile_90       <dbl> 1.516086e-20
-#> $ quantile_95       <dbl> 2.138596e-20
-#> $ quantile_99       <dbl> 3.798618e-20
+#> $ p_value           <dbl> 0.3633333
+#> $ quantile_90       <dbl> 1.826202e-20
+#> $ quantile_95       <dbl> 2.629817e-20
+#> $ quantile_99       <dbl> 4.179079e-20
 ```
 
 #### *RESET* test can also be used to test the linear hypothesis
@@ -111,8 +113,8 @@ r_test <- reset_test(lm_model)
 dplyr::glimpse(r_test)
 #> Observations: 1
 #> Variables: 6
-#> $ statistic   <dbl> 6.392148
-#> $ p_value     <dbl> 0.04092254
+#> $ statistic   <dbl> 1.90962
+#> $ p_value     <dbl> 0.3848852
 #> $ df          <int> 2
 #> $ quantile_90 <dbl> 4.60517
 #> $ quantile_95 <dbl> 5.991465
@@ -157,12 +159,12 @@ firm.eff <- rnorm(nlevels(firm))
 u <- rnorm(length(x))
 y <- x + 0.5*x2 + id.eff[id] + firm.eff[firm] + u
 new_y <- y + rnorm(length(y))
-## Estimate the model 
+## Estimate the model
 est <- lfe::felm(y ~ x + x2 | id + firm)
 
 
 ## Testing the linear hypothesis and plotting results
-dominguez_lobato_test(est, n_cores = 7) %>% 
+dominguez_lobato_test(est, n_cores = 7) %>%
   plot_dl_test()
 ```
 
@@ -188,7 +190,7 @@ arma_model <- forecast::Arima(x, order = c(1, 0, 1))
 #>   fitted.fracdiff    fracdiff
 #>   residuals.fracdiff fracdiff
 
-dominguez_lobato_test(arma_model) %>% 
+dominguez_lobato_test(arma_model) %>%
   plot_dl_test()
 ```
 
