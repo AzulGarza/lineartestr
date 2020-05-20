@@ -3,4 +3,5 @@ docs
 .Rhistory
 .RData
 .Ruserdata
-
+_pkgdown.yml
+paper
