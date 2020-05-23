@@ -1,0 +1,17 @@
+year <- sub("-.*", "", meta$Date)
+if(!length(year))
+  year <- substr(Sys.Date(),1,4)
+vers <- meta$Version
+if(is.null(vers))
+  vers <- packageVersion("forecast")
+vers <- paste("R package version", vers)
+
+citHeader("To cite lineartestr in publications use:")
+
+bibentry(bibtype    = "Manual",
+  title    = "{lineartestr}: Test the linear specification of a model",
+  author   = "Federico Garza",
+  year     = year,
+  note     = vers,
+  url      = "https://github.com/FedericoGarza/lineartestr"
+)
