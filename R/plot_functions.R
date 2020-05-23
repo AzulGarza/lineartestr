@@ -43,7 +43,6 @@ plot_reset_test <- function(x){
     ggplot2::geom_text(
       ggplot2::aes(x = statistic, y = 0, vjust = -2, hjust = 1.1, label = "Observed\n statistic"),
       data = value_d,
-      # color = "red",
       size = 3
     ) +
     viridis::scale_color_viridis(discrete = TRUE, direction = -1) +
@@ -60,7 +59,7 @@ plot_reset_test <- function(x){
 
 #' Plots the Dominguez-Lobato test.
 #'
-#' @param x An object of class "dl_test".
+#' @param x An object of class `dl_test`.
 #' @return Plot of type ggplot.
 #' @examples
 #' x <- 1:10
@@ -100,7 +99,6 @@ plot_dl_test <- function(x){
     ggplot2::geom_text(
       ggplot2::aes(x = statistic, y = 0, vjust = -2, hjust = 1.1, label = "Observed\n statistic"),
       data = value_d,
-      # color = "red",
       size = 3
     ) +
     viridis::scale_color_viridis(discrete = TRUE, direction = -1) +

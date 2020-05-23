@@ -119,7 +119,7 @@ An then we can plot the results
 plot_reset_test(r_test)
 ```
 
-### Linear fixed effects with [`lfe`](https://CRAN.R-project.org/web/packages/lfe/lfe.pdf)
+### Linear fixed effects with [`lfe`](https://CRAN.R-project.org/package=lfe)
 
 ```{r example_lfe}
 library(lineartestr)

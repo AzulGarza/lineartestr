@@ -7,7 +7,7 @@
 plot_dl_test(x)
 }
 \arguments{
-\item{x}{An object of class "dl_test".}
+\item{x}{An object of class `dl_test`.}
 }
 \value{
 Plot of type ggplot.

@@ -70,10 +70,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.3766667
-#> $ quantile_90       <dbl> 2.283939e-28
-#> $ quantile_95       <dbl> 3.239602e-28
-#> $ quantile_99       <dbl> 5.20654e-28
+#> $ p_value           <dbl> 0.4066667
+#> $ quantile_90       <dbl> 2.549223e-28
+#> $ quantile_95       <dbl> 3.887169e-28
+#> $ quantile_99       <dbl> 6.359681e-28
 ```
 
 Also `lineartestr` can plot the results
@@ -103,10 +103,10 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.34
-#> $ quantile_90       <dbl> 2.059126e-20
-#> $ quantile_95       <dbl> 2.425963e-20
-#> $ quantile_99       <dbl> 4.429028e-20
+#> $ p_value           <dbl> 0.3566667
+#> $ quantile_90       <dbl> 1.902697e-20
+#> $ quantile_95       <dbl> 2.532663e-20
+#> $ quantile_99       <dbl> 4.141126e-20
 ```
 
 #### *RESET* test can also be used to test the linear hypothesis
@@ -126,8 +126,8 @@ r_test <- reset_test(lm_model)
 dplyr::glimpse(r_test)
 #> Observations: 1
 #> Variables: 6
-#> $ statistic   <dbl> 5.07063
-#> $ p_value     <dbl> 0.07923674
+#> $ statistic   <dbl> 0.7797557
+#> $ p_value     <dbl> 0.6771396
 #> $ df          <int> 2
 #> $ quantile_90 <dbl> 4.60517
 #> $ quantile_95 <dbl> 5.991465
@@ -143,7 +143,7 @@ plot_reset_test(r_test)
 
 <img src="man/figures/README-plot_reset-1.png" width="70%" />
 
-### Linear fixed effects with [`lfe`](https://CRAN.R-project.org/web/packages/lfe/lfe.pdf)
+### Linear fixed effects with [`lfe`](https://CRAN.R-project.org/package=lfe)
 
 ``` r
 library(lineartestr)
