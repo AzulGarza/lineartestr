@@ -30,7 +30,8 @@ Imports:
     tidyr,
     readr,
     parallel,
-    forecast
+    forecast,
+    vctrs (>= 0.3.0)
 Suggests:
     testthat
 RoxygenNote: 7.0.2
