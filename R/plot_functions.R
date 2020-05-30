@@ -18,8 +18,10 @@ plot_reset_test <- function(x){
     stop("Model must be a reset_test object")
   }
 
-  value_d <- dplyr::select(x, statistic)
-  quantiles <- dplyr::select(x, dplyr::contains("quantile"))
+  df <- dplyr::as_tibble(x)
+
+  value_d <- dplyr::select(df, statistic)
+  quantiles <- dplyr::select(df, dplyr::contains("quantile"))
   quantiles <- tidyr::gather(quantiles, key = "prob", value = "q")
   quantiles$prob <- readr::parse_number(quantiles$prob)/100
 
