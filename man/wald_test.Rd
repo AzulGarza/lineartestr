@@ -9,7 +9,7 @@ wald_test(
   model,
   restrictions,
   value,
-  robust = F,
+  robust = FALSE,
   vcov = NULL,
   quantiles = c(0.9, 0.95, 0.99)
 )

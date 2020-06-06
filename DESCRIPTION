@@ -6,13 +6,13 @@ Authors@R: person("Federico", "Garza", , "fede.garza.ramirez@gmail.com", role = 
 Maintainer: Federico Garza <fede.garza.ramirez@gmail.com>
 Description: Tests whether the linear hypothesis of a model
     is correct specified using Dominguez-Lobato test. Also Ramsey's RESET (Regression Equation 
-    Specification Error Test) test is implemented and Wald tests can be carry out. 
+    Specification Error Test) test is implemented and Wald tests can be carried out. 
     Although RESET test is widely used to 
     test the linear hypothesis of a model, Dominguez and Lobato (2019) proposed a novel 
-    approach that generalize well known specification tests such as Ramsey's. This test 
-    relies on wild-bootstrap and this package implements this approach in a general way, 
-    being compatible with any function that fits linear models and is compatible with 
-    the 'update()' function such as 'stats::lm()', 'lfe::felm()' and 'forecast::Arima()', 
+    approach that generalizes well known specification tests such as Ramsey's. This test 
+    relies on wild-bootstrap; this package implements this approach to be 
+    usable with any function that fits linear models and is compatible with 
+    the update() function such as 'stats'::lm(), 'lfe'::felm() and 'forecast'::Arima(), 
     for ARMA (autoregressive–moving-average) models. 
     Also the package can handle custom statistics such as Cramer von Mises and Kolmogorov 
     Smirnov, described by the authors, and custom distributions such as Mammen (discrete 

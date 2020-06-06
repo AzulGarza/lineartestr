@@ -23,7 +23,7 @@
 #' w_test <- wald_test(model, restrictions, value)
 #' w_test <- wald_test(model, restrictions, value, robust = TRUE)
 #' w_test <- wald_test(model, restrictions, value, quantiles = c(.97))
-wald_test <- function(model, restrictions, value, robust = F, vcov = NULL, quantiles=c(.9, .95, .99)){
+wald_test <- function(model, restrictions, value, robust = FALSE, vcov = NULL, quantiles=c(.9, .95, .99)){
 
   if(!inherits(restrictions, "matrix")){
     stop("restrictions and value must be a matrix class")
