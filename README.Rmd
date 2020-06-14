@@ -15,9 +15,9 @@ knitr::opts_chunk$set(
 # lineartestr
 
 <!-- badges: start -->
-![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)
-![CRAN](https://www.r-pkg.org/badges/version/lineartestr)
-![Downloads](http://cranlogs.r-pkg.org/badges/lineartestr)
+[![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)](https://github.com/FedericoGarza/lineartestr)
+[![CRAN](https://www.r-pkg.org/badges/version/lineartestr)](https://cran.r-project.org/web/packages/lineartestr/index.html)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/lineartestr)](https://cran.r-project.org/web/packages/lineartestr/index.html)
 [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.en.html)
 <!-- badges: end -->
 

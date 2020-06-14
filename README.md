@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)
-![CRAN](https://www.r-pkg.org/badges/version/lineartestr)
-![Downloads](http://cranlogs.r-pkg.org/badges/lineartestr)
+[![R-CMD-check](https://github.com/FedericoGarza/lineartestr/workflows/R-CMD-check/badge.svg)](https://github.com/FedericoGarza/lineartestr)
+[![CRAN](https://www.r-pkg.org/badges/version/lineartestr)](https://cran.r-project.org/web/packages/lineartestr/index.html)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/lineartestr)](https://cran.r-project.org/web/packages/lineartestr/index.html)
 [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.en.html)
 <!-- badges: end -->
 
@@ -70,10 +70,10 @@ dplyr::glimpse(dl_test$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 7.562182e-29
-#> $ p_value           <dbl> 0.4066667
-#> $ quantile_90       <dbl> 2.549223e-28
-#> $ quantile_95       <dbl> 3.887169e-28
-#> $ quantile_99       <dbl> 6.359681e-28
+#> $ p_value           <dbl> 0.43
+#> $ quantile_90       <dbl> 2.848026e-28
+#> $ quantile_95       <dbl> 3.807996e-28
+#> $ quantile_99       <dbl> 5.551746e-28
 ```
 
 Also `lineartestr` can plot the results
@@ -103,10 +103,10 @@ dplyr::glimpse(dl_test_p$test)
 #> $ name_distribution <chr> "rnorm"
 #> $ name_statistic    <chr> "cvm_value"
 #> $ statistic         <dbl> 6.324343e-21
-#> $ p_value           <dbl> 0.3566667
-#> $ quantile_90       <dbl> 1.902697e-20
-#> $ quantile_95       <dbl> 2.532663e-20
-#> $ quantile_99       <dbl> 4.141126e-20
+#> $ p_value           <dbl> 0.3233333
+#> $ quantile_90       <dbl> 1.722463e-20
+#> $ quantile_95       <dbl> 2.80482e-20
+#> $ quantile_99       <dbl> 4.332467e-20
 ```
 
 #### *RESET* test can also be used to test the linear hypothesis
@@ -126,8 +126,8 @@ r_test <- reset_test(lm_model)
 dplyr::glimpse(r_test)
 #> Observations: 1
 #> Variables: 6
-#> $ statistic   <dbl> 0.7797557
-#> $ p_value     <dbl> 0.6771396
+#> $ statistic   <dbl> 1.180871
+#> $ p_value     <dbl> 0.554086
 #> $ df          <int> 2
 #> $ quantile_90 <dbl> 4.60517
 #> $ quantile_95 <dbl> 5.991465
