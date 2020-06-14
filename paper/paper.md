@@ -29,7 +29,7 @@ bibliography: paper.bib
 
 # Summary
 
-Many econometric models uses the underlying assumption that the relationship between endogenous and exogenuos variables is linear. This is the case of models such as difference-in-differences, fixed effects, regression discontinuity design among others that are particuarly useful to characterize causal relationships. As a part of the hypothesis imposed to the models, the linear relationship between the variables must be tested in order to guarantee a good design. The package lineartestr implements a novel approach developed by Domínguez and Lobato that tests the linear specification of a model. This approach generalizes well known specifications tests such as Ramsey's RESET (Regression Equation Specification Error Test).
+Many econometric models uses the underlying assumption that the relationship between endogenous and exogenuos variables is linear. This is the case of models such as difference-in-differences, fixed effects, regression discontinuity design among others that are particuarly useful to characterize causal relationships. As a part of the hypothesis imposed to the models, the linear relationship between the variables must be tested in order to guarantee a good design. The package lineartestr implements a novel approach developed by Domínguez and Lobato [@lobato] that tests the linear specification of a model. This approach generalizes well known specifications tests such as Ramsey's RESET (Regression Equation Specification Error Test).
 
 
 ## Domínguez-Lobato test
