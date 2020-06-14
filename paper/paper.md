@@ -34,10 +34,10 @@ Many econometric models uses the underlying assumption that the relationship bet
 
 ## Domínguez-Lobato test
 
-The Domínguez-Lobato approach tests the linear specification of a model. It means that tests the null hypothesis
+The Domínguez-Lobato approach tests the linear specification of a model. It means that tests the null hypothesis,
 
 $$
-H_0: y = \beta^T x + u
+H_0: y = \beta^T x + u.
 $$
 
 In their work, Domínguez and Lobato proposed two statisticts to test this hypothesis [@lobato]. First, the Cramer von Mises (CvM) statistic given by
@@ -52,7 +52,7 @@ $$
 K_n = \max_l \left| \sum_{i=1}^n \hat{u}_i I(\hat{y}_i \leq \hat{y}_l) \right|.
 $$
 
-With this statistics Domínguez and Lobato proposed a wild bootstrap test described by the following steps:
+With this statistics the authors proposed a wild bootstrap test described by the following steps:
 
 1. With the actual residuals $u_i = y_i - \hat{y}_i$ calculate the test statistic $C_n$ or $K_n$.
 2. Generate a collection $\{V^b_i\}$ of size $n$ of bounded random variables independent and identically distributed with mean zero and unit variance. With this observations construct a new endogenous variable,
@@ -81,7 +81,7 @@ The `lineartestr` package includes the function `dominguez_lobato_test` which pe
 
 ### Parallel processing
 
-The wild bootstrap approach of this test can be time consuming. Therefore `lineartestr` can process this repetitions in parallel using the `parallel` package [@r]. This can be done as simply as setting the `n_cores` parameter of the `dominguez_lobato_test` function with the number of desired workers to carry out this tasks.
+The wild bootstrap approach of this test can be time consuming. However, `lineartestr` can process this repetitions in parallel using the `parallel` package [@r]. This can be done as simply as setting the `n_cores` parameter of the `dominguez_lobato_test` function with the number of desired workers to carry out this tasks.
 
 ### Ramsey's RESET test
 
