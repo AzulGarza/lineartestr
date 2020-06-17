@@ -67,6 +67,8 @@ $$
 
 5. Calculate the $(1-\alpha)$-quantile from  ${C^b_n}$ or ${K^b_n}$: $C_{[1-\alpha]}$ or $K_{[1-\alpha]}$. Finally reject the null hypothesis at the $\alpha$ nominal level when $C_n > C_{[1-\alpha]}$ and when $K_n > K_{[1-\alpha]}$, respectively.
 
+The algorithm works because the statistic $C_n$ and $C^b_n$ share the same asymptotic distribution under the null hypothesis (for almost all samples) [@lobato]. 
+
 ## The `lineartestr` package
 
 The `lineartestr` package includes the function `dominguez_lobato_test` which performs the algorithm developed by Domínguez and Lobato. This function receives the four main parameters of the algorithm:
