@@ -29,7 +29,7 @@ bibliography: paper.bib
 
 # Summary
 
-Many econometric models uses the underlying assumption that the relationship between endogenous and exogenous variables is linear. This is the case of models such as difference-in-differences, fixed effects, regression discontinuity design among others that are particularly useful to characterize causal relationships [@angrist_mostly_2008]. As a part of the hypothesis imposed to the models, the linear relationship between the variables must be contrasted in order to guarantee the validity of the research results. The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests this hypothesis trough the function `dominguez_lobato_test`. This approach generalizes well known specifications tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. Therefore this package provides to researchers with a new robust tool to test the linear specification of a model.
+Many econometric models use the underlying assumption that the relationship between endogenous and exogenous variables is linear. This is the case of models such as difference-in-differences, fixed effects, regression discontinuity design among others that are particularly useful inferring causal relationships [@angrist_mostly_2008]. As a part of the hypothesis imposed to the models, the linear relationship between variables must be contrasted in order to guarantee the validity of the research results. The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests this hypothesis trough the function `dominguez_lobato_test`. This approach generalizes well known specifications tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. Therefore this package provides to researchers with a new robust tool to test the linear specification of a model.
 
 
 ## Domínguez-Lobato test
@@ -54,7 +54,7 @@ $$
 
 With this statistics the authors proposed a wild bootstrap test described by the following steps:
 
-1. With the actual residuals $u_i = y_i - \hat{y}_i$ calculate the test statistic $C_n$ or $K_n$.
+1. With the actual residuals $u_i = y_i - \hat{y}_i$ calculate $C_n$ or $K_n$.
 2. Generate a collection $\{V^b_i\}$ of size $n$ of bounded random variables independent and identically distributed with mean zero and unit variance. With this observations construct a new endogenous variable,
 
 $$
@@ -67,15 +67,15 @@ $$
 
 5. Calculate the $(1-\alpha)$-quantile from  ${C^b_n}$ or ${K^b_n}$: $C_{[1-\alpha]}$ or $K_{[1-\alpha]}$. Finally reject the null hypothesis at the $\alpha$ nominal level when $C_n > C_{[1-\alpha]}$ and when $K_n > K_{[1-\alpha]}$, respectively.
 
-The algorithm works because the statistic $C_n$ and $C^b_n$ share the same asymptotic distribution under the null hypothesis (for almost all samples) [@lobato]. 
+The algorithm works because the statistic $C_n$ and $C^b_n$ share the same asymptotic distribution under the null hypothesis (for almost all samples) [@lobato].
 
-## The `lineartestr` package
+## `lineartestr` package
 
 The `lineartestr` package includes the function `dominguez_lobato_test` which performs the algorithm developed by Domínguez and Lobato. This function receives the four main parameters of the algorithm:
 
-1. `model`: a fitted linear model. The package can handle any fitted linear model that is compatible with the `update()` function such as `stats::lm()` [@r] or `lfe::felm()` [@lfe]. Also is compatible with ARMA models (which are linear models) fitted from `forecast::Arima()` [@forecast].
+1. `model`: a fitted linear model. The package can handle any fitted linear model compatible with the `update()` function such as `stats::lm()` [@r] or `lfe::felm()` [@lfe]. Also the function can receive ARMA models (which are linear models) fitted from `forecast::Arima()` [@forecast].
 
-2. `distribution`: a function name from where the collection $\{V^b_i\}$ will be calculated. By default, the package uses a standard normal (`'rnorm'` that calls `stats::rnorm` [@r]) but other random variables wit mean zero and unit variance can be used. In particular, the package includes three special functions that satisfies this requirements: `'rmammen_cont'`, `'rmammen_point'` [@mammen] and `'rrademacher'` [@rrademacher].
+2. `distribution`: a function name from which the collection $\{V^b_i\}$ will be calculated. By default, the package uses a standard normal random variable (`'rnorm'` that calls `stats::rnorm` [@r]) but other random variables wit mean zero and unit variance can be used. In particular, the package includes three special functions that satisfies this requirements: `'rmammen_cont'`, `'rmammen_point'` [@mammen] and `'rrademacher'` [@rrademacher].
 
 3. `statistic`: `'cvm_value'` to use the CvM statistic or `'kmv_value'` to use the KS statistic.
 
@@ -107,7 +107,7 @@ For completeness the RESET test is also implemented trough the `reset_test` func
 
 ### Plot functions
 
-The package `lineartestr` also contains functions to plot each of the tests (`plot_dl_test` for the `dominguez_lobato_test`). This plots can be useful to get a visual description of the distribution of the statistic, the statistic and the critical values of the test.
+The package `lineartestr` also contains functions to plot each of the tests (`plot_dl_test` for the `dominguez_lobato_test`). This plots can be useful to get a visual description of the statistic distribution, the statistic value and the critical values of the test.
 
 # Acknowledgements
 
