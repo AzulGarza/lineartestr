@@ -29,7 +29,7 @@ bibliography: paper.bib
 
 # Summary
 
-Many econometric models use the underlying assumption that the relationship between endogenous and exogenous variables is linear. This is the case of models such as difference-in-differences, fixed effects, regression discontinuity design among others that are particularly useful inferring causal relationships [@angrist_mostly_2008]. As a part of the hypothesis imposed to the models, the linear relationship between variables must be contrasted in order to guarantee the validity of the research results. The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests this hypothesis trough the function `dominguez_lobato_test`. This approach generalizes well known specification tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. Therefore this package provides to researchers with a new robust tool to test the linear specification of a model.
+Many econometric models use the underlying assumption that the relationship between endogenous and exogenous variables is linear. This is the case of models such as difference-in-differences, fixed effects, regression discontinuity design among others that are particularly useful inferring causal relationships [@angrist_mostly_2008]. As a part of the hypothesis imposed to the models, the linear relationship between variables must be contrasted in order to guarantee the validity of the research results. The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests this hypothesis trough a bootstrap test with the function `dominguez_lobato_test`. This approach generalizes well known specification tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. Therefore this package provides to researchers with a new robust tool to test the linear specification of a model.
 
 
 ## Domínguez-Lobato test
@@ -75,7 +75,7 @@ The `lineartestr` package includes the function `dominguez_lobato_test` which pe
 
 1. `model`: a fitted linear model. The package can handle any fitted linear model compatible with the `update()` function such as `stats::lm()` [@r] or `lfe::felm()` [@lfe]. Also the function can receive ARMA models (which are linear models) fitted from `forecast::Arima()` [@forecast].
 
-2. `distribution`: a function name from which the collection $\{V^b_i\}$ will be calculated. By default, the package uses a standard normal random variable (`'rnorm'` that calls `stats::rnorm` [@r]) but other random variables wit mean zero and unit variance can be used. In particular, the package includes three special functions that satisfies this requirements: `'rmammen_cont'`, `'rmammen_point'` [@mammen] and `'rrademacher'` [@rrademacher].
+2. `distribution`: a function name from which the collection $\{V^b_i\}$ will be calculated. By default, the package uses a standard normal random variable (`'rnorm'` that calls `stats::rnorm` [@r]) but other random variables with mean zero and unit variance can be used. In particular, the package includes three special functions that satisfies this requirements: `'rmammen_cont'`, `'rmammen_point'` [@mammen] and `'rrademacher'` [@rrademacher].
 
 3. `statistic`: `'cvm_value'` to use the CvM statistic or `'kmv_value'` to use the KS statistic.
 
@@ -83,7 +83,7 @@ The `lineartestr` package includes the function `dominguez_lobato_test` which pe
 
 ### Parallel processing
 
-The wild bootstrap approach of this test can be time consuming. However, `lineartestr` can process this repetitions in parallel using the `parallel` package [@r]. This can be done as simply as setting the `n_cores` parameter of the `dominguez_lobato_test` function with the number of desired workers to carry out this tasks.
+The wild bootstrap approach of this test can be time consuming. However, `lineartestr` can process this repetitions trough parallel processing using the `parallel` package [@r]. This can be done as simply as setting the `n_cores` parameter of the `dominguez_lobato_test` function with the number of desired workers to carry out this tasks.
 
 ### Ramsey's RESET test
 
@@ -103,11 +103,11 @@ $$
 H_0: \gamma_1 = \gamma_2 =...= \gamma_{k-1} = 0.
 $$
 
-For completeness the RESET test is also implemented trough the `reset_test` function which uses the `wald_test` function to carry out the test of the null hypothesis. As the `dominguez_lobato_test` function, it receives a fitted linear model.
+For completeness the RESET test is also implemented trough the `reset_test` function which uses the custom `wald_test` function to carry out the null hypothesis test. Like the `dominguez_lobato_test` function, it receives a fitted linear model.
 
 ### Plot functions
 
-The package `lineartestr` also contains functions to plot each of the tests (`plot_dl_test` for the `dominguez_lobato_test`). This plots can be useful to get a visual description of the statistic's distribution, the statistic's value and the test's critical values.
+The package `lineartestr` also contains special functions to plot each of the tests (`plot_dl_test` for the `dominguez_lobato_test`). This plots can be useful to get a visual description of the statistic's distribution, the statistic's value and the test's critical values.
 
 # Acknowledgements
 
