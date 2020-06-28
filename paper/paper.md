@@ -29,7 +29,7 @@ bibliography: paper.bib
 
 # Summary
 
-Many econometric models use the underlying assumption that the relationship between endogenous and exogenous variables is linear. This is the case of models such as difference-in-differences, fixed effects, regression discontinuity design among others that are particularly useful inferring causal relationships [@angrist_mostly_2008]. As a part of the hypothesis imposed to the models, the linear relationship between variables must be contrasted in order to guarantee the validity of the research results. The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests this hypothesis trough the function `dominguez_lobato_test`. This approach generalizes well known specifications tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. Therefore this package provides to researchers with a new robust tool to test the linear specification of a model.
+Many econometric models use the underlying assumption that the relationship between endogenous and exogenous variables is linear. This is the case of models such as difference-in-differences, fixed effects, regression discontinuity design among others that are particularly useful inferring causal relationships [@angrist_mostly_2008]. As a part of the hypothesis imposed to the models, the linear relationship between variables must be contrasted in order to guarantee the validity of the research results. The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests this hypothesis trough the function `dominguez_lobato_test`. This approach generalizes well known specification tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. Therefore this package provides to researchers with a new robust tool to test the linear specification of a model.
 
 
 ## Domínguez-Lobato test
@@ -52,7 +52,7 @@ $$
 K_n = \max_l \left| \sum_{i=1}^n \hat{u}_i I(\hat{y}_i \leq \hat{y}_l) \right|.
 $$
 
-With this statistics the authors proposed a wild bootstrap test described by the following steps:
+With this statistics the authors propose a wild bootstrap test described by the following steps:
 
 1. With the actual residuals $u_i = y_i - \hat{y}_i$ calculate $C_n$ or $K_n$.
 2. Generate a collection $\{V^b_i\}$ of size $n$ of bounded random variables independent and identically distributed with mean zero and unit variance. With this observations construct a new endogenous variable,
@@ -97,7 +97,7 @@ $$
 y_i = \alpha^T x_i + \gamma_1 \hat{y_i}^2 + ... + \gamma_{k-1} \hat{y}^k + u_i.
 $$    
 
-3. Use a Wald test to contrast the following null hypothesis. If this null hypothesis is rejected, then the hypothesis of the linearity of the model is also rejected,
+3. Use a Wald test to contrast the following null hypothesis. If this null hypothesis is rejected, then the hypothesis of the model's linearity is also rejected,
 
 $$
 H_0: \gamma_1 = \gamma_2 =...= \gamma_{k-1} = 0.
@@ -107,7 +107,7 @@ For completeness the RESET test is also implemented trough the `reset_test` func
 
 ### Plot functions
 
-The package `lineartestr` also contains functions to plot each of the tests (`plot_dl_test` for the `dominguez_lobato_test`). This plots can be useful to get a visual description of the statistic distribution, the statistic value and the critical values of the test.
+The package `lineartestr` also contains functions to plot each of the tests (`plot_dl_test` for the `dominguez_lobato_test`). This plots can be useful to get a visual description of the statistic's distribution, the statistic's value and the test's critical values.
 
 # Acknowledgements
 
