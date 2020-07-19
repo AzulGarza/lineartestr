@@ -1,5 +1,5 @@
 ---
-title: 'lineartestr: An R package to test the linear specification of a model'
+title: 'lineartestr: An R package for testing the linear specification of a model'
 tags:
   - R
   - linear-specification
