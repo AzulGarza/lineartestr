@@ -40,7 +40,7 @@ $$
 H_0: y = \beta^T x + u.
 $$
 
-In their work, Domínguez and Lobato proposed two statisticts to test this hypothesis [@lobato]. First, the Cramer von Mises (CvM) statistic given by
+In their work, Domínguez and Lobato proposed two statistics to test this hypothesis [@lobato]. First, the Cramer von Mises (CvM) statistic given by
 
 $$
 C_n = \frac{1}{n^2} \sum_{l=1}^n \left[ \sum_{i=1}^n \hat{u_i} I(\hat{y}_i \leq \hat{y}_l)\right].
