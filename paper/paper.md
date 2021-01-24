@@ -33,7 +33,7 @@ Many econometric models use the underlying assumption that the relationship betw
 
 # Statement of need
 
-The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests the linear specification of a model trough a bootstrap test with the function `dominguez_lobato_test`. This approach generalizes well known specification tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. This is the main difference from other R packages that implement linearity tests such as `lmtest` [@lmtest] and `car` [@car]. Therefore this new package provides to researchers with a new robust tool to their research arsenal.
+The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests the linear specification of a model trough a bootstrap test with the main function `dominguez_lobato_test()`. This approach generalizes well known specification tests such as Ramsey's RESET (also implemented with the function `reset_test()`) and as the authors conclude this new test is more robust than others. This is the main difference from other R packages that implement linearity tests such as `lmtest` [@lmtest] and `car` [@car]. Therefore this new package provides to researchers with a new robust tool to their research arsenal.
 
 
 ## Domínguez-Lobato test
