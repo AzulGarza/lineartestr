@@ -33,7 +33,7 @@ Many econometric models use the underlying assumption that the relationship betw
 
 # Statement of need
 
-The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests the linear specification of a model trough a bootstrap test with the function `dominguez_lobato_test`. This approach generalizes well known specification tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. This is the main difference from other R packages that implement linearity tests such as [@lmtest], [@car]. Therefore this new package provides to researchers with a new robust tool to their research arsenal.
+The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests the linear specification of a model trough a bootstrap test with the function `dominguez_lobato_test`. This approach generalizes well known specification tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. This is the main difference from other R packages that implement linearity tests such as `lmtest` [@lmtest] and `car` [@car]. Therefore this new package provides to researchers with a new robust tool to their research arsenal.
 
 
 ## Domínguez-Lobato test
@@ -76,7 +76,7 @@ The algorithm works because the statistic $C_n$ and $C^b_n$ share the same asymp
 
 ## `lineartestr` package
 
-The `lineartestr` package includes the function `dominguez_lobato_test` which performs the algorithm developed by Domínguez and Lobato. This function receives the four main parameters of the algorithm:
+The `lineartestr` package includes the function `dominguez_lobato_test` which performs the algorithm developed by Domínguez and Lobato [@lobato]. This function receives the four main parameters of the algorithm:
 
 1. `model`: a fitted linear model. The package can handle any fitted linear model compatible with the `update()` function such as `stats::lm()` [@r] or `lfe::felm()` [@lfe]. Also the function can receive ARMA models (which are linear models) fitted from `forecast::Arima()` [@forecast].
 
