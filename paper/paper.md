@@ -29,7 +29,11 @@ bibliography: paper.bib
 
 # Summary
 
-Many econometric models use the underlying assumption that the relationship between endogenous and exogenous variables is linear. This is the case of models such as difference-in-differences, fixed effects, regression discontinuity design among others that are particularly useful inferring causal relationships [@angrist_mostly_2008]. As a part of the hypothesis imposed to the models, the linear relationship between variables must be contrasted in order to guarantee the validity of the research results. The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests this hypothesis trough a bootstrap test with the function `dominguez_lobato_test`. This approach generalizes well known specification tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. Therefore this package provides to researchers with a new robust tool to test the linear specification of a model.
+Many econometric models use the underlying assumption that the relationship between endogenous and exogenous variables is linear. This is the case of models such as difference-in-differences, fixed effects, regression discontinuity design among others that are particularly useful inferring causal relationships [@angrist_mostly_2008]. As a part of the hypothesis imposed to the models, the linear relationship between variables must be contrasted in order to guarantee the validity of the research results. To this end we have developed `lineartestr` for R [@r] with a novel and robust approach.
+
+# Statement of need
+
+The package `lineartestr` implements a novel approach developed by Domínguez and Lobato [@lobato] that tests the linear specification of a model trough a bootstrap test with the function `dominguez_lobato_test`. This approach generalizes well known specification tests such as Ramsey's RESET (also implemented with `reset_test`) and as the authors conclude this new test is more robust than others. This is the main difference from other R packages that implement linearity tests such as [@lmtest], [@car]. Therefore this new package provides to researchers with a new robust tool to their research arsenal.
 
 
 ## Domínguez-Lobato test
@@ -98,7 +102,7 @@ $$
 y_i = \alpha^T x_i + \gamma_1 \hat{y}_i^2 + ... + \gamma_{k-1} \hat{y}_i^k + u_i.
 $$    
 
-3. Use a Wald test to contrast the following null hypothesis. If this null hypothesis is rejected, then the hypothesis of the model's linearity is also rejected,
+3. Use a Wald test [@wald] to contrast the following null hypothesis. If this null hypothesis is rejected, then the hypothesis of the model's linearity is also rejected,
 
 $$
 H_0: \gamma_1 = \gamma_2 =...= \gamma_{k-1} = 0.
