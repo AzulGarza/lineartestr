@@ -40,13 +40,13 @@ $$
 H_0: y = \beta^T x + u.
 $$
 
-In their work, Domínguez and Lobato proposed two statistics to test this hypothesis [@lobato]. First, the Cramer von Mises (CvM) statistic given by
+Where $y$ is the target variable, $x$ are control variables and $u$ is the model error. In their work, Domínguez and Lobato proposed two statistics to test this hypothesis [@lobato]. Consider a collection $\{(y_i, x_i)\}$ of size n from $(y, x)$. First, the Cramer von Mises (CvM) statistic given by
 
 $$
-C_n = \frac{1}{n^2} \sum_{l=1}^n \left[ \sum_{i=1}^n \hat{u_i} I(\hat{y}_i \leq \hat{y}_l)\right].
+C_n = \frac{1}{n^2} \sum_{l=1}^n \left[ \sum_{i=1}^n \hat{u}_i I(\hat{y}_i \leq \hat{y}_l)\right].
 $$  
 
-Where $\hat{y}_j$ are the fitted values of the endogenous variable and $u_i = y_i - \hat{y}_i$. Second, the Kolmogorov Smirnov (KS) statistic given by
+Where $\hat{y}_j$ are the fitted values of the endogenous variable and $\hat{u}_i = y_i - \hat{y}_i$. Second, the Kolmogorov Smirnov (KS) statistic given by
 
 $$
 K_n = \max_l \left| \sum_{i=1}^n \hat{u}_i I(\hat{y}_i \leq \hat{y}_l) \right|.
@@ -54,18 +54,19 @@ $$
 
 With this statistics the authors propose a wild bootstrap test described by the following steps:
 
-1. With the actual residuals $u_i = y_i - \hat{y}_i$ calculate $C_n$ or $K_n$.
-2. Generate a collection $\{V^b_i\}$ of size $n$ of bounded random variables independent and identically distributed with mean zero and unit variance. With this observations construct a new endogenous variable,
+1. Fit the linear model $y_i  = \alpha^T x_i + u_i$ and collect the fitted values $\hat{y}_i$.
+2. With the actual residuals $\hat{u}_i = y_i - \hat{y}_i$ calculate $C_n$ or $K_n$.
+3. Generate a collection $\{V^b_i\}$ of size $n$ of bounded random variables independent and identically distributed with mean zero and unit variance. With this observations construct a new endogenous variable,
 
 $$
-y^b_i = \hat{y}_i + u_i*V^b_i.
+y^b_i = \hat{y}_i + \hat{u}_i*V^b_i.
 $$
 
-3. Adjust a new model $y^b_i = \beta^{bT} x_i + u^b_i$. With $\hat{u}^b_i = y^b_i - \hat{y}^b_i$ calculate $C^b_n$ or $K^b_n$ as corresponds.
+4. Adjust a new model $y^b_i = \beta^{bT} x_i + u^b_i$. With $\hat{u}^b_i = y^b_i - \hat{y}^b_i$ calculate $C^b_n$ or $K^b_n$ as corresponds.
 
-4. Generate a collection $\{C^b_n\}$ or $\{K^b_n\}$ of size $B$ repeating 2. Each collection $\{V^b_i\}$ is independent of each other.
+5. Generate a collection $\{C^b_n\}$ or $\{K^b_n\}$ of size $B$ repeating 2. Each collection $\{V^b_i\}$ is independent of each other.
 
-5. Calculate the $(1-\alpha)$-quantile from  ${C^b_n}$ or ${K^b_n}$: $C_{[1-\alpha]}$ or $K_{[1-\alpha]}$. Finally reject the null hypothesis at the $\alpha$ nominal level when $C_n > C_{[1-\alpha]}$ and when $K_n > K_{[1-\alpha]}$, respectively.
+6. Calculate the $(1-\alpha)$-quantile from  ${C^b_n}$ or ${K^b_n}$: $C_{[1-\alpha]}$ or $K_{[1-\alpha]}$. Finally reject the null hypothesis at the $\alpha$ nominal level when $C_n > C_{[1-\alpha]}$ and when $K_n > K_{[1-\alpha]}$, respectively.
 
 The algorithm works because the statistic $C_n$ and $C^b_n$ share the same asymptotic distribution under the null hypothesis (for almost all samples) [@lobato].
 
@@ -87,14 +88,14 @@ The wild bootstrap approach of this test can be time consuming. However, `linear
 
 ### Ramsey's RESET test
 
-The Ramsey's RESET test [@ramsey] is a widely known tool that can be used too to test the specification of a linear model. This method works as follows,
+The Ramsey's RESET (Regression Equation Specification Error Test) test [@ramsey] is a widely known tool that can be used too to test the specification of a linear model. This method works as follows,
 
-1. Fit the linear model.
+1. Fit the linear model $y_i  = \alpha^T x_i + u_i$ and collect the fitted values $\hat{y}_i$.
 
 2. Choose $k\geq3$ and estimate the following,
 
 $$
-y_i = \alpha^T x_i + \gamma_1 \hat{y_i}^2 + ... + \gamma_{k-1} \hat{y}^k + u_i.
+y_i = \alpha^T x_i + \gamma_1 \hat{y}_i^2 + ... + \gamma_{k-1} \hat{y}_i^k + u_i.
 $$    
 
 3. Use a Wald test to contrast the following null hypothesis. If this null hypothesis is rejected, then the hypothesis of the model's linearity is also rejected,
@@ -110,5 +111,7 @@ For completeness the RESET test is also implemented trough the `reset_test` func
 The package `lineartestr` also contains special functions to plot each of the tests (`plot_dl_test` for the `dominguez_lobato_test`). This plots can be useful to get a visual description of the statistic's distribution, the statistic's value and the test's critical values.
 
 # Acknowledgements
+
+We thank Daniela Baltazar Cerros and Kin Gutiérrez Olivares for their support and feedback.
 
 # References
